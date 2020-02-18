@@ -5,6 +5,7 @@
 *.rpyb
 *.rpymc
 game/saves/persistent
+*.save
 log.txt
 
 __pycache__/
