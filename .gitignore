@@ -1,6 +1,10 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.DS_Store
 *.py[cod]
+*.rpyc
+*.rpyb
+*.rpymc
 *$py.class
 
 # C extensions
