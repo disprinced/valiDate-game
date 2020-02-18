@@ -1,10 +1,15 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
-.DS_Store
-*.py[cod]
+
+# renpy stuff
 *.rpyc
 *.rpyb
 *.rpymc
+game/saves/persistent
+log.txt
+
+__pycache__/
+.DS_Store
+*.py[cod]
 *$py.class
 
 # C extensions
