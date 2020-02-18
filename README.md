@@ -2,6 +2,6 @@
 
 Headed by Dani Lalonders [@laIonders](https://twitter.com/laIonders) on twitter.
 
-A dating sim where you play as one of the characters dating or befriending another character in the game.
+A dating sim where you play as one of the characters dating or befriending another character in the game
 
-no conflic now
+Read this [online tutorial](https://pomelope.neocities.org/github_tutorial.html) for help setting up Github Desktop!
