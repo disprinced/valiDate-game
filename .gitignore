@@ -214,3 +214,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+game/saves/navigation.json
