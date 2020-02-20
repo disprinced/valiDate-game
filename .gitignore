@@ -8,7 +8,7 @@
 *~
 *.bak
 
-saves
+game/saves
 tmp
 cache
 env
