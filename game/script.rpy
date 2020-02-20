@@ -7,7 +7,11 @@ define reader = Character("")
 
 image bg to_be_continued:
     zoom 0.75
-    "gui/to_be_continued.png"
+    "endings/to_be_continued.png"
+
+image bg test_background:
+    zoom 0.5
+    "backgrounds/chick_fil_a.jpg"
 
 label start:
     call screen first_character_select_screen
