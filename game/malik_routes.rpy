@@ -29,6 +29,10 @@ label MalikIsabelle:
     show isabelle annoyed
 
     isabelle "Yeah, not much of a drinker. I dabble more in the COOL drug scene. Nothing crazy! Just the shit growing from the earth."
+
+    scene bg to_be_continued
+    window hide
+    pause
     return
 
 label MalikAnoki:
