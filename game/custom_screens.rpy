@@ -43,7 +43,6 @@ screen second_character_select_screen(character):
                 label _(character + " Character Select ")
             hbox:
                 style_prefix "radio"
-                # Add more vboxes for each character.
                 # TODO: Change textbutton to clickable image.
                 vpgrid:
                     cols 4
