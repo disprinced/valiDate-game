@@ -1,25 +1,56 @@
-
-## Character Select Screen ###################################
-##
+###################################
+## Character Select Screen
+###################################
 ## Displays character selection
 ##
+define character_list = ["Malik", "Isabelle", "Anoki", "Ashlie", "Arihi"]
 
-screen character_select_screen:
+screen first_character_select_screen:
     tag gameplay
-
-    style_prefix "malik"
 
     use game_menu(_("Character Selection"), scroll="viewport", yinitial=1.0):
         vbox:
-            box_wrap True
-            label _("Character Select")
             hbox:
+                style_prefix "radio"
+                xfill True
+                box_wrap True
+                label _("Character Select")
+
+            hbox:
+                style_prefix "radio"
+                # TODO: Change textbutton to clickable image.
+                vpgrid:
+                    cols 4
+                    spacing 50
+                    for char in character_list:
+                        textbutton _("[char] ") action Return(char)
+
+###################################
+## Second Character Select Screen
+###################################
+## Choose the character for initial character to interact with.
+##
+screen second_character_select_screen(character):
+    tag gameplay
+
+    use game_menu(_(character + " Character Selection"),
+        scroll="viewport", yinitial=1.0):
+        vbox:
+            hbox:
+                style_prefix "radio"
+                xfill True
+                box_wrap True
+                label _(character + " Character Select ")
+            hbox:
+                style_prefix "radio"
                 # Add more vboxes for each character.
                 # TODO: Change textbutton to clickable image.
-                vbox:
-                    style_prefix "radio"
-                    textbutton _("Malik") action Call("malik_route_start")
-
-                vbox:
-                    style_prefix "radio"
-                    textbutton _("Isabelle") action Call("isabelle_route_start")
+                vpgrid:
+                    cols 4
+                    spacing 50
+                    for char in character_list:
+                        if char != character:
+                            if renpy.has_label(character + char):
+                                textbutton _("[char] ") action Call(character + char)
+                            else:
+                                textbutton _("[char] ") action Call("unimplemented", character, char)
