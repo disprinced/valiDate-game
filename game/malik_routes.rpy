@@ -10,7 +10,7 @@ define malik = Character("Malik", color="#8a41ba")
 image malik_img:
     "sprites/anoki.png"
     # The anoki sprite is too big for the screen, so it is scaled.
-    zoom 0.25
+    zoom 0.5
     yoffset 200
 
 label MalikIsabelle:

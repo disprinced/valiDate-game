@@ -10,14 +10,14 @@ define isabelle = Character("Isabelle", color="#4046e0")
 image isabelle happy:
     "sprites/anoki_happy.png"
     # The anoki sprite is too big for the screen, so it is scaled.
-    zoom 0.25
+    zoom 0.5
     yoffset 200
 
 # TODO: update image with isabelle sprites once they're available.
 image isabelle annoyed:
     "sprites/anoki_annoyed.png"
     # The anoki sprite is too big for the screen, so it is scaled.
-    zoom 0.25
+    zoom 0.5
     yoffset 200
 
 label IsabelleMalik:
