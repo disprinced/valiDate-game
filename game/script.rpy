@@ -12,9 +12,16 @@ image bg test_background:
     "backgrounds/chick_fil_a.jpg"
 
 label start:
-    # call screen test_screen
-    call screen first_character_select_screen
-    call screen second_character_select_screen(_return)
+    call screen a_char_select_screen(None)
+    $ char1 = _return
+#    call screen first_character_select_screen
+    call screen a_char_select_screen(_return)
+    $ char2 = _return
+
+    if renpy.has_label(char1 + char2):
+        $renpy.call(char1 + char2)
+    else:
+        $renpy.call("unimplemented",char1, char2)
     return
 
 label unimplemented(char1, char2):

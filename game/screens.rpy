@@ -25,11 +25,11 @@ style gui_text:
     properties gui.text_properties("interface")
 
 style button:
-    properties gui.button_properties("custom_button")
-#    properties gui.button_properties("button")
+    #properties gui.button_properties("custom_button")
+    properties gui.button_properties("button")
 
 style button_text is gui_text:
-    properties gui.text_properties("button")
+    properties gui.text_properties("custom_button")
     yalign 0.5
 
 
