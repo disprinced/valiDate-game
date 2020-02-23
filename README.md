@@ -10,3 +10,5 @@ When you first clone this repo, make sure that the repo is being saved in the sa
 
 ![renpy settings](https://media.discordapp.net/attachments/519754564610818050/679183722112614440/Screen_Shot_2020-02-17_at_8.32.02_PM.png)
 
+Programmers:
+Lisa she/they (Head dev)
