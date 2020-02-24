@@ -12,3 +12,4 @@ When you first clone this repo, make sure that the repo is being saved in the sa
 
 # Programmers
 Lisa she/they (Head dev)
+Adrian he/him (occasional graphics colors or sound implementation)
