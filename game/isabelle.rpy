@@ -1,7 +1,7 @@
 ###################################
-## Isabelle's Routes
+## Isabelle constants
 ###################################
-## Add routes for Isabelle here.
+## Add constants related to Isabelle here
 ##
 
 define isabelle = Character("Isabelle", color="#4046e0")
@@ -37,14 +37,6 @@ image isabelle upset:
     zoom 0.25
     yoffset 200
 
-image bg red_lobster:
-    "backgrounds/vtg_ppl_b_dither.png"
-
-image bg car:
-    "backgrounds/vtg_geo_combo.png"
-
-image bg isa_house:
-    "backgrounds/vtg_gta_combo.png"
 
 label IsabelleAshlie:
     isabelle "TODO add Isabelle and Ashlie's route here for demo"

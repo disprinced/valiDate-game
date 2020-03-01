@@ -7,7 +7,6 @@ label IsabelleMalik:
     reader "You didn’t have to be in the theater until late this afternoon for a dress rehearsal. And you love the theater life."
     reader "But god damn were you just not in the mood to deal with people like yourself, people who refused to grow out of their theater phase of high school."
 
-    scene bg test_background with dissolve
     show isabelle default1:
         xalign 0.0
         linear 0.5 xalign 0.5
@@ -24,10 +23,9 @@ label IsabelleMalik:
     reader "Do you need a drink? Some food? Both? Can you get both at 11 AM?"
     reader "Probably, you do live in a rather big city. The city sleeps, but it is too early for an afternoon siesta."
 
-    scene bg test_background
-    with fade
-
     reader "12:30 PM is the time you finally figure out where you want to spend your afternoon and grab that drink you desperately need. Or maybe the food will be enough to put you back in the usual chipper mood."
+
+    scene bg bobeyes with dissolve
 
     reader "You enter the Popeyes/Bar fusion that was not too far from the park you were seated at. Making sure to allow the door to close quietly behind you so you wouldn’t cause too much of a scene. You didn’t want your bad mood to become even worse. "
 
@@ -47,14 +45,16 @@ label IsaMalikPopeyes:
     reader "You decide you need food in you more than you needed a drink. The growl of your stomach nearly loud enough for people in passing to hear. And that was embarrassing to say the least."
     reader "You haven’t felt this hungry in a while. Or maybe your bad mood is pushing you to eat for comfort. Either way, you enter the Popeyes. Glancing over the menu before glancing at the tall man who stood behind one of the registers."
 
-    show malik distracted:
+    show malik distracted with dissolve:
         xalign 0.9
 
     reader "Wow, this man was… so fucking hot. You find yourself staring longer than you should. Thankfully he is busy with another customer and wasn’t paying much attention to you."
     reader "The mood that had previously been sour had dispensed into thin air. The theater nerd who never grew up came back in full force as you approached his register."
 
-    show isabelle default2:
-        xalign 0.2
+    show isabelle default1:
+        xalign 0.0
+        linear 0.5 xalign 0.2
+
     isabelle "So I’m thinking that I want a drown down some dry biscuits with a shot of tequila? "
 
     malik "Nice to know you don’t drink much."
