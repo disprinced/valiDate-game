@@ -11,10 +11,10 @@ image bg to_be_continued:
 image bg test_background:
     "backgrounds/chick_fil_a.jpg"
 
+### CODE FOR ONE SCREEN AT A TIME
 label start:
     call screen a_char_select_screen(None)
     $ char1 = _return
-#    call screen first_character_select_screen
     call screen a_char_select_screen(_return)
     $ char2 = _return
 
@@ -23,7 +23,6 @@ label start:
     else:
         $renpy.call("unimplemented",char1, char2)
     return
-
 label unimplemented(char1, char2):
     scene bg to_be_continued
     show text "[char1] and [char2]'s route hasn't been implemented/written yet!"

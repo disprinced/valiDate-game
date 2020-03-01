@@ -46,7 +46,10 @@ init python:
             im.MatrixColor(
         "gui/buttons_defaults/button_chamfer_phonesku10_0_hover.png",
         im.matrix.desaturate())
-
+        style.select_icon_button[char].selected_background = \
+            im.MatrixColor(
+        "gui/buttons_defaults/button_chamfer_phonesku10_0_onclick.png",
+        im.matrix.hue(hue))
 
 ## The horizontal alignment of the button text. (0.0 is left, 0.5 is center, 1.0
 ## is right).
