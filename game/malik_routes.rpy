@@ -6,11 +6,10 @@
 
 define malik = Character("Malik", color="#8a41ba")
 
-# TODO: update image with isabelle sprites once they're available.
-image malik_img:
-    "sprites/anoki.png"
+image malik distracted:
+    "sprites/anoki_happy.png"
     # The anoki sprite is too big for the screen, so it is scaled.
-    zoom 0.5
+    zoom 0.4
     yoffset 200
 
 label MalikIsabelle:
