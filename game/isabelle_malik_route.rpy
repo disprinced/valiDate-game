@@ -1,13 +1,13 @@
 
 label IsabelleMalik:
-    scene bg test_background
+    scene black
 
     reader "You weren’t sure where you were going as you left your house this morning."
     reader "Not really in the mood to deal with public transit or Ubers. So you walked. You walked into the buiser part of your neighborhood with no destination. "
     reader "You didn’t have to be in the theater until late this afternoon for a dress rehearsal. And you love the theater life."
     reader "But god damn were you just not in the mood to deal with people like yourself, people who refused to grow out of their theater phase of high school."
 
-    scene bg test_background
+    scene bg test_background with dissolve
     show isabelle default1:
         xalign 0.0
         linear 0.5 xalign 0.5

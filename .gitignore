@@ -216,3 +216,4 @@ dmypy.json
 .pyre/
 game/saves/navigation.json
 *.swp
+*.txt
