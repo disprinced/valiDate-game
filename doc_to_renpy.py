@@ -16,8 +16,12 @@ def read_text_to_renpy(in_file, out_file):
         else:
           name = line[:colon_index].strip().lower()
           dialogue = line[colon_index + 1:-1].strip()
-          print(dialogue.find('"'))
-          dialogue = dialogue.replace('"', '\\"')
+        
+        # remove non ascii characters:
+        dialogue = dialogue.decode("utf-8").replace(u"\u2019", "'")
+        dialogue = dialogue.replace(u"\u2026", "...")
+        dialogue = dialogue.replace('"', '\\"')
+        dialogue = dialogue.replace('%', '\\%')
 
         if len(dialogue) == 0:
           continue
