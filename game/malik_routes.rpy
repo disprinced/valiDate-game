@@ -4,7 +4,7 @@
 ## Add routes for Malik here.
 ##
 
-define malik = Character("Malik", color="#8a41ba")
+define malik = Character("Malik", color="#A30748")
 
 image malik distracted:
     "sprites/anoki_happy.png"

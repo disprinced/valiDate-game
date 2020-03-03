@@ -4,7 +4,7 @@
 ## Add constants related to Isabelle here
 ##
 
-define isabelle = Character("Isabelle", color="#4046e0")
+define isabelle = Character("Isabelle", color="#22E584")
 
 image isabelle default1:
     "sprites/isabelle/SPRITEDEFAULT-1.png"

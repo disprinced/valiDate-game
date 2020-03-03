@@ -1,44 +1,44 @@
 define character_structs = {
     "Malik": {
-        "color": renpy.random.randint(0,360),
+        "hue": 335,
         "intro": "Failed rap career aside, this man still owes you a free chicken sandwich. Maybe you should hit him up to see if you can cash in on that."
     },
     "Isabelle": {
-        "color": renpy.random.randint(0,360),
+        "hue": 150,
         "sprite": "sprites/isabelle/SPRITEDEFAULT-1.png",
         "intro": "You miss the sweet sound of Hamilton in your ear, you wonder how she’s been doing with that one person she was talking about the last time you spoke."
     },
     "Anoki": {
-        "color": renpy.random.randint(0,360),
+        "hue": 175,
         "sprite": "sprites/anoki_happy.png",
         "intro": "The last time you spoke to them you got into a heated argument about the importance of elf ears in an elf cosplay. You wonder if they brought that fight to their new partner?"
     },
     "Ashlie": {
-        "color": renpy.random.randint(0,360),
+        "hue": 320,
         "intro": "New Jersey’s number one twitch streamer and she can hardly keep a relationship. Or a friendship for that matter. Maybe you should check on her?"
     },
     "Arihi": {
-        "color": renpy.random.randint(0,360),
+        "hue": 215,
         "intro": "You know he has a habit to try to fix everyone, being a therapist and all. But has he really tried to put that on his partners?"
     },
     "Yolanda": {
-        "color": renpy.random.randint(0,360),
+        "hue": 40,
         "intro": "You probably caught her in the middle of a hair appointment, even though she typically is sweet enough to remind you of that."
     },
     "Rocky": {
-        "color": renpy.random.randint(0,360),
+        "hue": renpy.random.randint(0,360),
         "intro": "You wonder if he got his controlling nature under control. You remember it wrecking the last relationships he had."
     },
     "Alonzo": {
-        "color": renpy.random.randint(0,360),
+        "hue": 80,
         "intro": "You wonder how long it’ll take to get a response from Alonzo, you know his fuckboy tendencies often lead him to forgetting to reply to a text from an old friend."
     },
     "Catherine": {
-        "color": renpy.random.randint(0,360),
+        "hue": 50,
         "intro": "Your favorite fashionista is probably entirely too busy talking shit about whatever the Kardashians wore to reply to you. Maybe you caught her in a good mood."
     },
     "Emhari": {
-        "color": renpy.random.randint(0,360),
+        "hue": 6,
         "intro": "You never understood why he needed 7 different weddings rings despite only wanting to marry one person. Maybe he finally found the one?"
     },
 }
@@ -80,19 +80,19 @@ init python:
         style.select_icon_button[char].background = \
             im.MatrixColor(
         "gui/buttons_defaults/button_chamfer_phonesku10_0.png",
-        im.matrix.hue(values['color']))
-        style.select_icon_button[values['color']].hover_background = \
+        im.matrix.hue(values['hue']))
+        style.select_icon_button[values['hue']].hover_background = \
             im.MatrixColor(
         "gui/buttons_defaults/button_chamfer_phonesku10_0_hover.png",
-        im.matrix.hue(values['color']))
-        style.select_icon_button[values['color']].insensitive_background = \
+        im.matrix.hue(values['hue']))
+        style.select_icon_button[values['hue']].insensitive_background = \
             im.MatrixColor(
         "gui/buttons_defaults/button_chamfer_phonesku10_0_hover.png",
         im.matrix.desaturate())
         style.select_icon_button[char].selected_background = \
             im.MatrixColor(
         "gui/buttons_defaults/button_chamfer_phonesku10_0_onclick.png",
-        im.matrix.hue(values['color']))
+        im.matrix.hue(values['hue']))
 
 
 
