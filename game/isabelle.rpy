@@ -5,6 +5,7 @@
 ##
 
 define isabelle = Character("Isabelle", color="#22E584")
+define audio.isabelle_theme = "audio/022520_vtg_anoki.mp3"
 
 image isabelle default1:
     "sprites/isabelle/SPRITEDEFAULT-1.png"

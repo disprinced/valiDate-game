@@ -3,9 +3,13 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
+init python:
+    renpy.music.register_channel("theme_music", "music", loop=True, tight=True)
+    
 # probably should also be in italics
 define reader = Character("", what_font="gui/fonts/Dosis-Medium.otf")
 
+define audio.bad_end = "audio/030120_vtg_badend.mp3"
 image bg to_be_continued:
     "endings/to_be_continued.png"
 
@@ -15,6 +19,8 @@ image bg test_background:
 
 ### CODE FOR ONE SCREEN AT A TIME
 label start:
+    stop music fadeout 1.0
+
     scene black
     reader "The sun casts over a cold Jersey City day, the wind isn't blowing as hard as it usually does, but you still find yourself hugging your coat a bit closer to your body to shield yourself from the cold. You duck into the hair salon you have been directed to by a friend. The warm heat of a space heater fills your body the moment you step in."
     reader "You don't have a name, at least not yet. But you do have an interest for poetry and the art of hearing people speak their feelings over the occasional chill hip-hop beat."
@@ -22,6 +28,7 @@ label start:
     reader "You decide to sit yourself in the corner, pulling out your phone to text one of your friends, maybe they will help you in your time of need."
     reader "Who will you text?"
 
+    play theme_music "audio/022320_vtg_charsel.mp3"
     call screen a_char_select_screen(None)
     $ char1 = _return
 

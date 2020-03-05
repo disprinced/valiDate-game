@@ -1,6 +1,7 @@
 
 label IsabelleMalik:
     scene black
+    play theme_music isabelle_theme
 
     reader "You weren’t sure where you were going as you left your house this morning."
     reader "Not really in the mood to deal with public transit or Ubers. So you walked. You walked into the buiser part of your neighborhood with no destination. "
@@ -134,6 +135,7 @@ label IsaMalikBar:
     Maybe having a bad day won’t kill you, maybe it is healthy for life to not be so perfect all the time."
 
     scene black
+    play theme_music bad_end
     show text "Isabelle + Malik Bar Bad End"
     window hide
     pause
@@ -330,6 +332,7 @@ label IsaMalikRap:
     reader "You often let your mouth work faster than your brain, and for once, you block your own blessings."
 
     scene black
+    play theme_music bad_end
     show text "Popeyes bad end"
     window hide
     pause
