@@ -5,7 +5,7 @@
 
 init python:
     renpy.music.register_channel("theme_music", "music", loop=True, tight=True)
-    
+
 # probably should also be in italics
 define reader = Character("", what_font="gui/fonts/Dosis-Medium.otf")
 
@@ -31,6 +31,7 @@ label start:
     play theme_music "audio/022320_vtg_charsel.mp3"
     call screen a_char_select_screen(None)
     $ char1 = _return
+    call screen character_hover(char1)
 
     scene black
     $ intro = character_structs[char1]['intro']

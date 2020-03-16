@@ -32,12 +32,10 @@ define character_structs = {
     },
     "Anoki": {
         "hue": 175,
-        "sprite": "sprites/anoki_happy.png",
         "intro": "The last time you spoke to them you got into a heated argument about the importance of elf ears in an elf cosplay. You wonder if they brought that fight to their new partner?"
     },
     "Isabelle": {
         "hue": 150,
-        "sprite": "sprites/isabelle/SPRITEDEFAULT-1.png",
         "intro": "You miss the sweet sound of Hamilton in your ear, you wonder how she’s been doing with that one person she was talking about the last time you spoke."
     },
     "Alonzo": {
@@ -77,6 +75,7 @@ define gui.custom_button_borders = Borders(4, 4, 4, 4)
 ## If True, the background image will be tiled. If False, the background image
 ## will be linearly scaled.
 define gui.custom_button_tile = False
+define gui.custom_button_color = "#fff"
 
 ## The font used by the button.
 define gui.custom_button_text_font = gui.interface_text_font
@@ -85,10 +84,13 @@ define gui.custom_button_text_font = gui.interface_text_font
 define gui.custom_button_text_size = gui.interface_text_size
 
 ## The color of button text in various states.
-define gui.custom_button_text_idle_color = gui.idle_small_color
-define gui.custom_button_text_hover_color = gui.hover_color
-define gui.custom_button_text_selected_color = gui.selected_color
-define gui.custom_button_text_insensitive_color = gui.insensitive_color
+define gui.custom_button_text_idle_color = "#fff"
+define gui.custom_button_text_hover_color = "#fff"
+define gui.custom_button_text_selected_color = "#fff"
+define gui.custom_button_text_insensitive_color = "#fff"
+
+define gui.back_button_width = 90
+define gui.back_button_height = 90
 
 init python:
     import math
@@ -112,40 +114,95 @@ init python:
             0, 0, 0, 1, 0,
             0, 0, 0, 0, 1)
 
-    for char, values in character_structs.iteritems():
+    for char, val in character_structs.iteritems():
+        phone_sprite = "gui/character_select/cs1_%s.png" % (char)
         style.select_icon_button[char].background = \
-            im.MatrixColor(
-        "gui/buttons_defaults/button_chamfer_phonesku10_0.png",
-        #im.matrix.hue(values['hue']))
-        custom_hue_shifter(values['hue']))
-        style.select_icon_button[values['hue']].hover_background = \
-            im.MatrixColor(
-        "gui/buttons_defaults/button_chamfer_phonesku10_0_hover.png",
-        #im.matrix.hue(values['hue']))
-        custom_hue_shifter(values['hue']))
-        style.select_icon_button[values['hue']].insensitive_background = \
-            im.MatrixColor(
-        "gui/buttons_defaults/button_chamfer_phonesku10_0_hover.png",
-        im.matrix.desaturate())
-        style.select_icon_button[char].selected_background = \
-            im.MatrixColor(
-        "gui/buttons_defaults/button_chamfer_phonesku10_0_onclick.png",
-        #im.matrix.hue(values['hue']))
-        custom_hue_shifter(values['hue']))
+            Image(phone_sprite)
+        style.select_icon_button[char].hover_background = \
+            Image("gui/character_select/cs1_%s_hover.png" % (char))
 
+        style.select_icon_button[char].insensitive_background = \
+             im.MatrixColor(phone_sprite, im.matrix.desaturate())
 
+        style.text_button[char].xpadding = 50
+        style.text_button[char].ypadding = 20
+        style.text_button[char].background = \
+            im.MatrixColor("gui/character_select/button_bg.png",
+            custom_hue_shifter(val['hue']))
+        style.text_button[char].hover_background = \
+            im.MatrixColor("gui/character_select/button_bg_hover.png",
+            custom_hue_shifter(val['hue']))
+        style.back_button[char].background = \
+            im.MatrixColor("gui/character_select/button_goback.png",
+            custom_hue_shifter(val['hue']))
+        style.back_button[char].hover_background = \
+            im.MatrixColor("gui/character_select/button_goback_hover.png",
+            custom_hue_shifter(val['hue']))
 
 ## The horizontal alignment of the button text. (0.0 is left, 0.5 is center, 1.0
 ## is right).
 define gui.custom_button_text_xalign = 0.0
 
-#define anoki_sprite = "sprites/anoki_happy.png"
-#define isabelle_sprite = "sprites/isabelle/SPRITEDEFAULT-1.png"
 define sprite_not_found = im.MatrixColor("sprites/anoki_annoyed.png",
     im.matrix.desaturate())
 
 define image_path = im.MatrixColor("sprites/anoki_annoyed.png",
     im.matrix.desaturate())
+
+screen character_hover(character):
+    style_prefix "char_hover"
+    if character not in character_structs:
+        label _("char [character] not in struct")
+        $ print("char [character]")
+
+    $ char_lower = character.lower()
+    $ bg = "gui/character_select/bg_[char_lower].png"
+    $ stats = "gui/character_select/stats_[char_lower].png"
+    $ name_title = "gui/character_select/tex_[char_lower].png"
+    $ emblem = "gui/character_select/emblem_[char_lower].png"
+    $ sprite = "sprites/[character]/[character]_Neutral.png"
+    python:
+        aaa = "sprites/%s/%s_Neutral.png" % (character, character)
+    $ shadow = im.MatrixColor(aaa, im.matrix.brightness(-1))
+
+    add bg
+    add stats:
+        pos (750, 285)
+    add name_title:
+        pos(660, 120)
+    add emblem:
+        pos(1185, 165)
+    add shadow:
+        maxsize(800, 1480000)
+        pos (70, -15)
+     #   zoom 0.85
+    #    xoffset -95
+#        yoffset 30
+    add sprite:
+        maxsize(800, 1480000)
+        xpos(100)
+    #    zoom 0.85
+    #    xoffset -70
+#        yoffset 50
+    hbox:
+        pos(495, 705)
+        for i, char in enumerate(rainbow_order):
+            vbox:
+                frame style "empty_frame":
+                    textbutton _(" ") action Return(char) style style.select_icon_button[char]
+    hbox:
+        style_prefix "custom"
+        #pos (825, 960)
+        pos (764, 896)
+        textbutton _("CANCEL") action Jump("start") style style.text_button[character]
+        textbutton _("CONFIRM") action MainMenu() style style.text_button[character]
+
+    button action MainMenu() style style.back_button[character]:
+        pos (207, 885)
+        xsize 90
+        ysize 90
+
+
 ###################################
 ## Character Select Screen
 ###################################
@@ -227,22 +284,6 @@ style main_menu_frame:
     xsize 420
     yfill True
 
-
-style custom_label is pref_label
-style custom_label_text is pref_label_text
-style custom_button is gui_button
-style custom_button_text is gui_button_text
-style custom_vbox is pref_vbox
-
-style custom_button:
-    xpadding 50
-    ypadding 30
-    properties gui.button_properties("custom_button")
-    background Frame("gui/buttons_defaults/button_chamfer_3x1_0_background.png")
-    hover_background Frame("gui/buttons_defaults/test.png")
-
-style custom_button_text:
-    properties gui.button_text_properties("custom_button")
 
 
 style select_icon_label is pref_label
