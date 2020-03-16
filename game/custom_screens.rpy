@@ -1,49 +1,65 @@
+define rainbow_order = [
+    'Emhari',
+    #'Bigs',
+    'Yolanda',
+    'Rocky',
+    'Alonzo',
+    'Isabelle',
+    'Anoki',
+    'Arihi',
+    'Catherine',
+    #'Inaya',
+    'Ashlie',
+    'Malik']
+
 define character_structs = {
     "Malik": {
         "hue": 335,
         "intro": "Failed rap career aside, this man still owes you a free chicken sandwich. Maybe you should hit him up to see if you can cash in on that."
     },
-    "Isabelle": {
-        "hue": 150,
-        "sprite": "sprites/isabelle/SPRITEDEFAULT-1.png",
-        "intro": "You miss the sweet sound of Hamilton in your ear, you wonder how she’s been doing with that one person she was talking about the last time you spoke."
+    "Ashlie": {
+        "hue": 320,
+        "intro": "New Jersey’s number one twitch streamer and she can hardly keep a relationship. Or a friendship for that matter. Maybe you should check on her?"
+    },
+    # add Inaya
+    "Catherine": {
+        "hue": 270,
+        "intro": "Your favorite fashionista is probably entirely too busy talking shit about whatever the Kardashians wore to reply to you. Maybe you caught her in a good mood."
+    },
+    "Arihi": {
+        "hue": 215,
+        "intro": "You know he has a habit to try to fix everyone, being a therapist and all. But has he really tried to put that on his partners?"
     },
     "Anoki": {
         "hue": 175,
         "sprite": "sprites/anoki_happy.png",
         "intro": "The last time you spoke to them you got into a heated argument about the importance of elf ears in an elf cosplay. You wonder if they brought that fight to their new partner?"
     },
-    "Ashlie": {
-        "hue": 320,
-        "intro": "New Jersey’s number one twitch streamer and she can hardly keep a relationship. Or a friendship for that matter. Maybe you should check on her?"
-    },
-    "Arihi": {
-        "hue": 215,
-        "intro": "You know he has a habit to try to fix everyone, being a therapist and all. But has he really tried to put that on his partners?"
-    },
-    "Yolanda": {
-        "hue": 40,
-        "intro": "You probably caught her in the middle of a hair appointment, even though she typically is sweet enough to remind you of that."
-    },
-    "Rocky": {
-        "hue": renpy.random.randint(0,360),
-        "intro": "You wonder if he got his controlling nature under control. You remember it wrecking the last relationships he had."
+    "Isabelle": {
+        "hue": 150,
+        "sprite": "sprites/isabelle/SPRITEDEFAULT-1.png",
+        "intro": "You miss the sweet sound of Hamilton in your ear, you wonder how she’s been doing with that one person she was talking about the last time you spoke."
     },
     "Alonzo": {
         "hue": 80,
         "intro": "You wonder how long it’ll take to get a response from Alonzo, you know his fuckboy tendencies often lead him to forgetting to reply to a text from an old friend."
     },
-    "Catherine": {
-        "hue": 50,
-        "intro": "Your favorite fashionista is probably entirely too busy talking shit about whatever the Kardashians wore to reply to you. Maybe you caught her in a good mood."
+    "Rocky": {
+        "hue": 56,
+        "intro": "You wonder if he got his controlling nature under control. You remember it wrecking the last relationships he had."
     },
+    "Yolanda": {
+        "hue": 40,
+        "intro": "You probably caught her in the middle of a hair appointment, even though she typically is sweet enough to remind you of that."
+    },
+    # add Bigs
     "Emhari": {
         "hue": 6,
         "intro": "You never understood why he needed 7 different weddings rings despite only wanting to marry one person. Maybe he finally found the one?"
     },
 }
 
-define character_list = character_structs.keys()
+define character_list = rainbow_order
 #define character_list = [str(x) for x in range(10)]
 
 # character select screen constants
@@ -75,16 +91,38 @@ define gui.custom_button_text_selected_color = gui.selected_color
 define gui.custom_button_text_insensitive_color = gui.insensitive_color
 
 init python:
+    import math
+    def custom_hue_shifter(hue):
+        h = hue * math.pi / 180
+        x = math.cos(h)
+        y = math.sin(h)
+        return im.matrix(
+            2.0/3 * x + 1.0/3,
+            -1.0/3 * x - 0.57735026919 * y + 1.0 / 3,
+            -1.0/3 * x + 0.57735026919 * y + 1.0 / 3,
+            0, 0,
+            -1.0/3 * x + 0.57735026919 * y + 1.0 / 3,
+            2.0/3 * x + 1.0/3,
+            -1.0/3 * x - 0.57735026919 * y + 1.0 / 3,
+            0, 0,
+            -1.0/3 * x - 0.57735026919 * y + 1.0 / 3,
+            -1.0/3 * x + 0.57735026919 * y + 1.0 / 3,
+            2.0/3 * x + 1.0/3,
+            0, 0,
+            0, 0, 0, 1, 0,
+            0, 0, 0, 0, 1)
 
     for char, values in character_structs.iteritems():
         style.select_icon_button[char].background = \
             im.MatrixColor(
         "gui/buttons_defaults/button_chamfer_phonesku10_0.png",
-        im.matrix.hue(values['hue']))
+        #im.matrix.hue(values['hue']))
+        custom_hue_shifter(values['hue']))
         style.select_icon_button[values['hue']].hover_background = \
             im.MatrixColor(
         "gui/buttons_defaults/button_chamfer_phonesku10_0_hover.png",
-        im.matrix.hue(values['hue']))
+        #im.matrix.hue(values['hue']))
+        custom_hue_shifter(values['hue']))
         style.select_icon_button[values['hue']].insensitive_background = \
             im.MatrixColor(
         "gui/buttons_defaults/button_chamfer_phonesku10_0_hover.png",
@@ -92,7 +130,8 @@ init python:
         style.select_icon_button[char].selected_background = \
             im.MatrixColor(
         "gui/buttons_defaults/button_chamfer_phonesku10_0_onclick.png",
-        im.matrix.hue(values['hue']))
+        #im.matrix.hue(values['hue']))
+        custom_hue_shifter(values['hue']))
 
 
 
