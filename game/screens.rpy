@@ -244,7 +244,7 @@ screen quick_menu():
 
     ## Ensure this appears on top of other screens.
     zorder 100
-    use renedit_overlay
+    ## use renedit_overlay
 
     if quick_menu:
 
@@ -262,7 +262,7 @@ screen quick_menu():
             textbutton _("Q.Save") action QuickSave()
             textbutton _("Q.Load") action QuickLoad()
             textbutton _("Prefs") action ShowMenu('preferences')
-            textbutton "Editing Mode" action ToggleScreen("renedit_overlay")
+            textbutton "Editing Mode" action #ToggleScreen("renedit_overlay")
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -1425,7 +1425,7 @@ screen quick_menu():
     variant "touch"
 
     zorder 100
-    use renedit_overlay
+    #use renedit_overlay
 
     if quick_menu:
 
@@ -1439,7 +1439,7 @@ screen quick_menu():
             textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Auto") action Preference("auto-forward", "toggle")
             textbutton _("Menu") action ShowMenu()
-            textbutton "Editing Mode" action ToggleScreen("renedit_overlay")
+            textbutton "Editing Mode" action #ToggleScreen("renedit_overlay")
 
 
 style window:

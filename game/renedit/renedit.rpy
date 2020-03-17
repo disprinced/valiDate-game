@@ -24,9 +24,9 @@
 ### If the Ren'Py project you're working on does not use Ren'Edit, you can enable it yourself.
 ### Follow the installation instructions as normal in the ReadMe, but uncomment the following lines (15-17).
 
-init python:
-     config.underlay.append(renpy.Keymap(renedit_mode = Show("renedit_overlay")))
-     config.keymap["renedit_mode"] = ['e']
+# init python:
+#      config.underlay.append(renpy.Keymap(renedit_mode = Show("renedit_overlay")))
+#      config.keymap["renedit_mode"] = ['e']
 
 ### Then, simply press "e" in-game to enable the overlay.
 

@@ -21,6 +21,7 @@ image bg test_background:
 label start:
     stop music fadeout 1.0
 
+    $ renpy.start_predict_screen(_('first_character_select_screen'))
     scene black
     reader "The sun casts over a cold Jersey City day, the wind isn't blowing as hard as it usually does, but you still find yourself hugging your coat a bit closer to your body to shield yourself from the cold. You duck into the hair salon you have been directed to by a friend. The warm heat of a space heater fills your body the moment you step in."
     reader "You don't have a name, at least not yet. But you do have an interest for poetry and the art of hearing people speak their feelings over the occasional chill hip-hop beat."
@@ -28,11 +29,13 @@ label start:
     reader "You decide to sit yourself in the corner, pulling out your phone to text one of your friends, maybe they will help you in your time of need."
     reader "Who will you text?"
 
-    play theme_music "audio/022320_vtg_charsel.mp3"
-    call screen a_char_select_screen(None)
-    $ char1 = _return
-    call screen character_hover(char1)
+    #play theme_music "audio/022320_vtg_charsel.mp3"
 
+
+    call screen first_character_select_screen()
+    $ char1 = _return
+
+    $ renpy.stop_predict_screen(_('first_character_select_screen'))
     scene black
     $ intro = character_structs[char1]['intro']
     if "sprite" in character_structs[char1]:

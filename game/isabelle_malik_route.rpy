@@ -7,7 +7,7 @@ image bg isa_malik_rap:
 
 label IsabelleMalik:
     scene black
-    play theme_music isabelle_theme
+    #play theme_music isabelle_theme
 
     reader "You weren’t sure where you were going as you left your house this morning."
     reader "Not really in the mood to deal with public transit or Ubers. So you walked. You walked into the buiser part of your neighborhood with no destination. "

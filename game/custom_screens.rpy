@@ -19,40 +19,50 @@ define character_structs = {
     },
     "Ashlie": {
         "hue": 320,
+        "sprite_pos": (150, 30, 0.70),
         "intro": "New Jersey’s number one twitch streamer and she can hardly keep a relationship. Or a friendship for that matter. Maybe you should check on her?"
     },
     # add Inaya
     "Catherine": {
         "hue": 270,
+        "sprite_pos": (10, 80, 0.5),
+        "flip": True,
         "intro": "Your favorite fashionista is probably entirely too busy talking shit about whatever the Kardashians wore to reply to you. Maybe you caught her in a good mood."
     },
     "Arihi": {
         "hue": 215,
+        "sprite_pos": (100, 40, 0.5),
         "intro": "You know he has a habit to try to fix everyone, being a therapist and all. But has he really tried to put that on his partners?"
     },
     "Anoki": {
         "hue": 175,
+        "sprite_pos": (-150, 70, 0.5),
         "intro": "The last time you spoke to them you got into a heated argument about the importance of elf ears in an elf cosplay. You wonder if they brought that fight to their new partner?"
     },
     "Isabelle": {
         "hue": 150,
+        "sprite_pos": (-100, 80, 0.40),
         "intro": "You miss the sweet sound of Hamilton in your ear, you wonder how she’s been doing with that one person she was talking about the last time you spoke."
     },
     "Alonzo": {
         "hue": 80,
+        "sprite_pos": (100, 30, 0.525),
         "intro": "You wonder how long it’ll take to get a response from Alonzo, you know his fuckboy tendencies often lead him to forgetting to reply to a text from an old friend."
     },
     "Rocky": {
         "hue": 56,
+        "sprite_pos": (0, 0, 0.6),
         "intro": "You wonder if he got his controlling nature under control. You remember it wrecking the last relationships he had."
     },
     "Yolanda": {
         "hue": 40,
+        "sprite_pos": (-250, 80, 0.5),
         "intro": "You probably caught her in the middle of a hair appointment, even though she typically is sweet enough to remind you of that."
     },
     # add Bigs
     "Emhari": {
         "hue": 6,
+        "sprite_pos": (-130, 0, 1),
         "intro": "You never understood why he needed 7 different weddings rings despite only wanting to marry one person. Maybe he finally found the one?"
     },
 }
@@ -86,6 +96,14 @@ define gui.custom_button_text_size = gui.interface_text_size
 define gui.back_button_width = 90
 define gui.back_button_height = 90
 
+define gui.text_button_color = "#fff"
+
+define sprite_not_found = Image(im.MatrixColor("sprites/Anoki/anoki_annoyed.png",
+    im.matrix.desaturate()))
+
+define blah = False
+default first_character = "Emhari"
+default hovered_variable = first_character
 init python:
     import math
     def custom_hue_shifter(hue):
@@ -109,17 +127,35 @@ init python:
             0, 0, 0, 0, 1)
 
     for char, val in character_structs.iteritems():
+        char_lower = char.lower()
+        val['bg'] = Image("gui/character_select/bg_%s.png" % (char_lower))
+        val['stats'] = Image("gui/character_select/stats_%s.png" % (char_lower))
+        val['name_title'] = Image("gui/character_select/tex_%s.png" % (char_lower))
+        val['emblem'] = Image("gui/character_select/emblem_%s.png" % (char_lower))
+
+        if "sprite_pos" not in val:
+            val['sprite'] = sprite_not_found
+        else:
+
+            val['sprite'] = Image("sprites/%s/%s_Neutral.png" % (char, char))
+
+        if 'flip' in val:
+            val['sprite'] = im.Flip(val['sprite'], horizontal=True)
+        val['shadow'] = im.MatrixColor(val['sprite'], im.matrix.brightness(-1))
+
         phone_sprite = "gui/character_select/cs1_%s.png" % (char)
         style.select_icon_button[char].background = \
             Image(phone_sprite)
         style.select_icon_button[char].hover_background = \
             Image("gui/character_select/cs1_%s_hover.png" % (char))
-
+        style.select_icon_button[char].selected_idle_background = \
+            im.MatrixColor("gui/character_select/cs1_%s_hover.png" % (char), im.matrix.desaturate())
         style.select_icon_button[char].insensitive_background = \
              im.MatrixColor(phone_sprite, im.matrix.desaturate())
 
         style.text_button[char].xpadding = 50
         style.text_button[char].ypadding = 20
+        style.text_button_text[char].color = "#fff"
         style.text_button[char].background = \
             im.MatrixColor("gui/character_select/button_bg.png",
             custom_hue_shifter(val['hue']))
@@ -137,65 +173,85 @@ init python:
 ## is right).
 define gui.custom_button_text_xalign = 0.0
 
-define sprite_not_found = im.MatrixColor("sprites/anoki_annoyed.png",
-    im.matrix.desaturate())
-
-define image_path = im.MatrixColor("sprites/anoki_annoyed.png",
-    im.matrix.desaturate())
 
 screen character_hover(character):
     style_prefix "char_hover"
-    if character not in character_structs:
-        label _("char [character] not in struct")
-        $ print("char [character]")
-
-    $ char_lower = character.lower()
-    $ bg = "gui/character_select/bg_[char_lower].png"
-    $ stats = "gui/character_select/stats_[char_lower].png"
-    $ name_title = "gui/character_select/tex_[char_lower].png"
-    $ emblem = "gui/character_select/emblem_[char_lower].png"
-    $ sprite = "sprites/[character]/[character]_Neutral.png"
     python:
-        aaa = "sprites/%s/%s_Neutral.png" % (character, character)
-    $ shadow = im.MatrixColor(aaa, im.matrix.brightness(-1))
+        info = character_structs[character]
+        bg = info['bg']
+        stats = info['stats']
+        name_title = info['name_title']
+        emblem = info['emblem']
+        sprite = info['sprite']
+        shadow = info['shadow']
+        if "sprite_pos" not in character_structs[character]:
+            x, y, scale_value = \
+             character_structs['Anoki']['sprite_pos']
+        else:
+            x, y, scale_value = \
+             character_structs[character]['sprite_pos']
+        # char_lower = character.lower()
+        # bg = "gui/character_select/bg_[char_lower].png"
+        # stats = "gui/character_select/stats_[char_lower].png"
+        # name_title = "gui/character_select/tex_[char_lower].png"
+        # emblem = "gui/character_select/emblem_[char_lower].png"
+        # if "sprite_pos" not in character_structs[character]:
+        #     x, y, scale_value = character_structs['Anoki']['sprite_pos']
+        #     sprite = sprite_not_found
+        # else:
+        #     x, y, scale_value = character_structs[character]['sprite_pos']
+        #     sprite = "sprites/%s/%s_Neutral.png" % (character, character)
+        #
+        # shadow = im.MatrixColor(sprite, im.matrix.brightness(-1))
+        shadow_x = x - 30
+        shadow_y = y - 15
 
     add bg
     add stats:
         pos (750, 285)
     add name_title:
-        pos(660, 120)
+        pos (660, 120)
     add emblem:
-        pos(1185, 165)
+        pos (1185, 165)
     add shadow:
-        maxsize(800, 1480000)
-        pos (70, -15)
-     #   zoom 0.85
-    #    xoffset -95
-#        yoffset 30
+        pos (shadow_x, shadow_y)
+        zoom scale_value
     add sprite:
-        maxsize(800, 1480000)
-        xpos(100)
-    #    zoom 0.85
-    #    xoffset -70
-#        yoffset 50
+        pos (x, y)
+        zoom scale_value
+
+    # hbox:
+    #     pos(495, 705)
+    #     for i, char in enumerate(rainbow_order):
+    #         vbox:
+    #             frame style "empty_frame":
+    #                 textbutton _(" ") action Return(char) style style.select_icon_button[char]
+    hbox:
+        style_prefix "custom"
+        pos (756, 960)
+
+        textbutton _("CANCEL") action Jump("start") style style.text_button[character]
+        textbutton _("CONFIRM") action Return(character) style style.text_button[character]
+
+    button action MainMenu() style style.back_button[character]:
+        pos (193, 960)
+        xsize 90
+        ysize 90
+    transclude
+
+
+screen first_character_select_screen():
+    use character_hover(hovered_variable)
     hbox:
         pos(495, 705)
         for i, char in enumerate(rainbow_order):
             vbox:
                 frame style "empty_frame":
-                    textbutton _(" ") action Return(char) style style.select_icon_button[char]
-    hbox:
-        style_prefix "custom"
-        #pos (825, 960)
-        pos (764, 896)
-        textbutton _("CANCEL") action Jump("start") style style.text_button[character]
-        textbutton _("CONFIRM") action MainMenu() style style.text_button[character]
-
-    button action MainMenu() style style.back_button[character]:
-        pos (207, 885)
-        xsize 90
-        ysize 90
-
+                    textbutton _(" "):
+                        action [SetVariable("first_character", char), SetVariable("hovered_variable", char)]
+                        hovered SetVariable("hovered_variable", char)
+                        unhovered SetVariable("hovered_variable", first_character)
+                        style style.select_icon_button[char]
 
 ###################################
 ## Character Select Screen
@@ -277,7 +333,6 @@ style empty_frame is empty
 style main_menu_frame:
     xsize 420
     yfill True
-
 
 
 style select_icon_label is pref_label

@@ -61,7 +61,7 @@ define config.has_voice = False
 ## the player is at the main menu. This file will continue playing into the
 ## game, until it is stopped or another file is played.
 
-define config.main_menu_music = "audio/020120_vtg_title_b.mp3"
+#define config.main_menu_music = "audio/020120_vtg_title_b.mp3"
 
 
 ## Transitions #################################################################

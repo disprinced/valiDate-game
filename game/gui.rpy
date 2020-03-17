@@ -12,6 +12,7 @@ init python:
     gui.init(1920, 1080)
 
 
+define config.image_cache_size = 12
 
 ################################################################################
 ## GUI Configuration Variables
