@@ -83,12 +83,6 @@ define gui.custom_button_text_font = gui.interface_text_font
 ## The size of the text used by the button.
 define gui.custom_button_text_size = gui.interface_text_size
 
-## The color of button text in various states.
-define gui.custom_button_text_idle_color = "#fff"
-define gui.custom_button_text_hover_color = "#fff"
-define gui.custom_button_text_selected_color = "#fff"
-define gui.custom_button_text_insensitive_color = "#fff"
-
 define gui.back_button_width = 90
 define gui.back_button_height = 90
 

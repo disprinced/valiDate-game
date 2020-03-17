@@ -1,4 +1,10 @@
 
+image bg isa_bar_gameover:
+    "endings/ISAGAMEOVER1.jpg"
+
+image bg isa_malik_rap:
+    "endings/ISAGAMEOVER1.jpg"
+
 label IsabelleMalik:
     scene black
     play theme_music isabelle_theme
@@ -134,7 +140,7 @@ label IsaMalikBar:
     reader "You sip at your drink as you glance out the window, watching the world pass you by.
     Maybe having a bad day won’t kill you, maybe it is healthy for life to not be so perfect all the time."
 
-    scene black
+    scene bg isa_bar_gameover
     play theme_music bad_end
     show text "Isabelle + Malik Bar Bad End"
     window hide
@@ -331,7 +337,7 @@ label IsaMalikRap:
     reader "You’re embarrassed, but you order a $5 box and get it to go. You don’t want to make more of an ass out of yourself than you already have."
     reader "You often let your mouth work faster than your brain, and for once, you block your own blessings."
 
-    scene black
+    scene bg isa_malik_rap
     play theme_music bad_end
     show text "Popeyes bad end"
     window hide
