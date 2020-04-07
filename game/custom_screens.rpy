@@ -1,3 +1,4 @@
+
 define rainbow_order = [
     'Emhari',
     #'Bigs',
@@ -7,7 +8,7 @@ define rainbow_order = [
     'Isabelle',
     'Anoki',
     'Arihi',
-    'Catherine',
+#    'Catherine',
     #'Inaya',
     'Ashlie',
     'Malik']
@@ -101,10 +102,16 @@ define gui.text_button_color = "#fff"
 define sprite_not_found = Image(im.MatrixColor("sprites/Anoki/anoki_annoyed.png",
     im.matrix.desaturate()))
 
+define no_second_character = Image("gui/splits/bg_cs2_dark.png")
+
 define blah = False
 default first_character = "Emhari"
 default hovered_variable = first_character
+default second_character = ""
+default second_hovered_variable = second_character
+
 init python:
+    print ("in init")
     import math
     def custom_hue_shifter(hue):
         h = hue * math.pi / 180
@@ -128,15 +135,18 @@ init python:
 
     for char, val in character_structs.iteritems():
         char_lower = char.lower()
-        val['bg'] = Image("gui/character_select/bg_%s.png" % (char_lower))
-        val['stats'] = Image("gui/character_select/stats_%s.png" % (char_lower))
-        val['name_title'] = Image("gui/character_select/tex_%s.png" % (char_lower))
-        val['emblem'] = Image("gui/character_select/emblem_%s.png" % (char_lower))
+        # val['bg'] = Image("gui/character_select/bg_%s.png" % (char_lower))
+        # val['stats'] = Image("gui/character_select/stats_%s.png" % (char_lower))
+        # val['name_title'] = Image("gui/character_select/tex_%s.png" % (char_lower))
+        # val['emblem'] = Image("gui/character_select/emblem_%s.png" % (char_lower))
 
+        # TODO remove extra values in struct because gui was flattened.
+        val['bg'] = Image("gui/flattened_character_select/charsel_%s.png" % char_lower)
+        val['left_sprite'] = Image("gui/splits/ds_%s_L.png" % (char_lower))
+        val['right_sprite'] = Image("gui/splits/ds_%s_R.png" % (char_lower))
         if "sprite_pos" not in val:
             val['sprite'] = sprite_not_found
         else:
-
             val['sprite'] = Image("sprites/%s/%s_Neutral.png" % (char, char))
 
         if 'flip' in val:
@@ -152,6 +162,14 @@ init python:
             im.MatrixColor("gui/character_select/cs1_%s_hover.png" % (char), im.matrix.desaturate())
         style.select_icon_button[char].insensitive_background = \
              im.MatrixColor(phone_sprite, im.matrix.desaturate())
+
+        style.phone_icon_button[char].background = \
+            Image("gui/contacts/ct_%s.png" % (char_lower))
+        style.phone_icon_button[char].hover_background = \
+            Image("gui/contacts/ct_%s_hover.png" % (char_lower))
+        style.phone_icon_button[char].selected_idle_background = \
+            Image("gui/contacts/ct_%s_select.png" % (char_lower))
+
 
         style.text_button[char].xpadding = 50
         style.text_button[char].ypadding = 20
@@ -179,58 +197,12 @@ screen character_hover(character):
     python:
         info = character_structs[character]
         bg = info['bg']
-        stats = info['stats']
-        name_title = info['name_title']
-        emblem = info['emblem']
-        sprite = info['sprite']
-        shadow = info['shadow']
-        if "sprite_pos" not in character_structs[character]:
-            x, y, scale_value = \
-             character_structs['Anoki']['sprite_pos']
-        else:
-            x, y, scale_value = \
-             character_structs[character]['sprite_pos']
-        # char_lower = character.lower()
-        # bg = "gui/character_select/bg_[char_lower].png"
-        # stats = "gui/character_select/stats_[char_lower].png"
-        # name_title = "gui/character_select/tex_[char_lower].png"
-        # emblem = "gui/character_select/emblem_[char_lower].png"
-        # if "sprite_pos" not in character_structs[character]:
-        #     x, y, scale_value = character_structs['Anoki']['sprite_pos']
-        #     sprite = sprite_not_found
-        # else:
-        #     x, y, scale_value = character_structs[character]['sprite_pos']
-        #     sprite = "sprites/%s/%s_Neutral.png" % (character, character)
-        #
-        # shadow = im.MatrixColor(sprite, im.matrix.brightness(-1))
-        shadow_x = x - 30
-        shadow_y = y - 15
-
     add bg
-    add stats:
-        pos (750, 285)
-    add name_title:
-        pos (660, 120)
-    add emblem:
-        pos (1185, 165)
-    add shadow:
-        pos (shadow_x, shadow_y)
-        zoom scale_value
-    add sprite:
-        pos (x, y)
-        zoom scale_value
-
-    # hbox:
-    #     pos(495, 705)
-    #     for i, char in enumerate(rainbow_order):
-    #         vbox:
-    #             frame style "empty_frame":
-    #                 textbutton _(" ") action Return(char) style style.select_icon_button[char]
     hbox:
         style_prefix "custom"
         pos (756, 960)
 
-        textbutton _("CANCEL") action Jump("start") style style.text_button[character]
+        textbutton _("CANCEL") action MainMenu() style style.text_button[character]
         textbutton _("CONFIRM") action Return(character) style style.text_button[character]
 
     button action MainMenu() style style.back_button[character]:
@@ -239,9 +211,9 @@ screen character_hover(character):
         ysize 90
     transclude
 
-
 screen first_character_select_screen():
     use character_hover(hovered_variable)
+
     hbox:
         pos(495, 705)
         for i, char in enumerate(rainbow_order):
@@ -253,80 +225,50 @@ screen first_character_select_screen():
                         unhovered SetVariable("hovered_variable", first_character)
                         style style.select_icon_button[char]
 
-###################################
-## Character Select Screen
-###################################
-## Displays character selection
-##
-screen a_char_select_screen(character):
-    modal True
-    tag gameplay
-    add cs.background
-    if character is not None:
-        if "sprite" in character_structs[character]:
-            $ sprite = character_structs[character]["sprite"]
-            add sprite:
-                zoom 0.6
-                xoffset -300
+
+screen second_character_hover(character):
+    python:
+        if character == "":
+            right_sprite = no_second_character
         else:
-            add sprite_not_found:
-                    zoom 0.6
-                    xoffset -300
+            right_sprite = character_structs[character]['right_sprite']
+    add right_sprite
 
-
-    $ char_name = "" if character is None else character
-
-    frame style "empty_frame":
-        pos (700, 134)
-        text "[char_name]":
-            style "main_menu_title"
-            size 100
+screen second_character_select_screen(first_char):
+    style_prefix "char_hover"
+    use second_character_hover(second_hovered_variable)
+    python:
+        info = character_structs[first_char]
+        left_sprite = info['left_sprite']
+    add left_sprite
 
     hbox:
         style_prefix "custom"
-        pos (703, 980)
-        vbox:
-            textbutton _("BACK") action Jump("start")
-        vbox:
-            textbutton _("CANCEL") action MainMenu()
+        pos (796, 731)
 
-    style_prefix "empty"
-    frame:
-        has vbox
-        if character is None:
-            pos (627, 177)
-        else:
-            pos (1236, 199)
-        box_wrap True
-        if character is not None:
-            label _("Who should [character] go on a date with???")
-        else:
-            label _("Character Select")
-        vbox :
-            style_prefix "select_icon"
-            $ num_cols = 3
-            $ elem_index = 0
-            for row in range((len(character_list) / num_cols) + 1):
-                hbox:
-                    yoffset (-80 * row)
-                    if row % 2 == 1:
-                        $ num_cols = 4
-                        xoffset -80
-                    else:
-                        $ num_cols = 3
-                        xoffset 0
-                    for col in range(num_cols):
-                        if elem_index < len(character_list):
+        textbutton _("NAH  ") action Jump("select_screen") style style.text_button[first_character]
+        textbutton _("SEND") action Return(second_character) style style.text_button[first_character]
 
-                            $char = character_list[elem_index]
-                            frame xmaximum 160 ymaximum 240 style "empty_frame":
-                                # Disable character if already on selected character
-                                if character == char:
-                                    textbutton _("[char] ") style style.select_icon_button[char]
-
-                                else:
-                                    textbutton _("[char] ") action Return(char)  style style.select_icon_button[char]
-                            $elem_index += 1
+    vpgrid:
+        pos (796, 240)
+        xminimum 400
+        cols 3
+        yspacing 0
+        xspacing -5
+        style_prefix "select_icon"
+        $ num_cols = 3
+        $ num_rows = (len(rainbow_order) - 1) / num_cols
+        $ i = 0
+        for char in rainbow_order:
+            if char != first_char:
+                textbutton _(""):
+                    #pos (row * 100,  col * 80)
+                    action [ToggleVariable("second_character", true_value=char, false_value=""), SetVariable("second_hovered_variable", char)]
+                    hovered SetVariable("second_hovered_variable", char)
+                    unhovered SetVariable("second_hovered_variable", second_character)
+                    style style.phone_icon_button[char]
+                    xminimum 110
+                    yminimum 120
 
 style empty_frame is empty
 
