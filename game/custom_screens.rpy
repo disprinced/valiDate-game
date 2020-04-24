@@ -1,25 +1,26 @@
-
 define rainbow_order = [
-    'Emhari',
-    #'Bigs',
-    'Yolanda',
-    'Rocky',
-    'Alonzo',
-    'Isabelle',
-    'Anoki',
-    'Arihi',
+ 'Emhari',
+ #'Bigs',
+ 'Yolanda',
+ 'Rocky',
+ 'Alonzo',
+ 'Isabelle',
+ 'Anoki',
+ 'Arihi',
 #    'Catherine',
-    #'Inaya',
-    'Ashlie',
-    'Malik']
+ #'Inaya',
+ 'Ashlie',
+ 'Malik']
 
 define character_structs = {
     "Malik": {
         "hue": 335,
+        "demo_routes": ['Isabelle', 'Anoki', 'Arihi'],
         "intro": "Failed rap career aside, this man still owes you a free chicken sandwich. Maybe you should hit him up to see if you can cash in on that."
     },
     "Ashlie": {
         "hue": 320,
+        "demo_routes": ['Isabelle'],
         "sprite_pos": (150, 30, 0.70),
         "intro": "New Jersey’s number one twitch streamer and she can hardly keep a relationship. Or a friendship for that matter. Maybe you should check on her?"
     },
@@ -32,16 +33,19 @@ define character_structs = {
     },
     "Arihi": {
         "hue": 215,
+        "demo_routes": ['Malik'],
         "sprite_pos": (100, 40, 0.5),
         "intro": "You know he has a habit to try to fix everyone, being a therapist and all. But has he really tried to put that on his partners?"
     },
     "Anoki": {
         "hue": 175,
+        "demo_routes": ['Malik'],
         "sprite_pos": (-150, 70, 0.5),
         "intro": "The last time you spoke to them you got into a heated argument about the importance of elf ears in an elf cosplay. You wonder if they brought that fight to their new partner?"
     },
     "Isabelle": {
         "hue": 150,
+        "demo_routes": ['Malik', 'Ashlie'],
         "sprite_pos": (-100, 80, 0.40),
         "intro": "You miss the sweet sound of Hamilton in your ear, you wonder how she’s been doing with that one person she was talking about the last time you spoke."
     },
@@ -69,12 +73,8 @@ define character_structs = {
 }
 
 define character_list = rainbow_order
-#define character_list = [str(x) for x in range(10)]
 
 # character select screen constants
-# this will probably be diff for every character
-#define cs.background = "backgrounds/charsel_anoki.png"
-define cs.background = "#d6a3b9"
 
 ## The width and height of a button, in pixels. If None, Ren'Py computes a size.
 define gui.custom_button_width = None
@@ -104,8 +104,7 @@ define sprite_not_found = Image(im.MatrixColor("sprites/Anoki/anoki_annoyed.png"
 
 define no_second_character = Image("gui/splits/bg_cs2_dark.png")
 
-define blah = False
-default first_character = "Emhari"
+default first_character = "Malik"
 default hovered_variable = first_character
 default second_character = ""
 default second_hovered_variable = second_character
@@ -217,6 +216,7 @@ screen first_character_select_screen():
     hbox:
         pos(495, 705)
         for i, char in enumerate(rainbow_order):
+            $ has_demo_route = 'demo_routes' in character_structs[char]
             vbox:
                 frame style "empty_frame":
                     textbutton _(" "):
@@ -240,14 +240,26 @@ screen second_character_select_screen(first_char):
     python:
         info = character_structs[first_char]
         left_sprite = info['left_sprite']
+        if 'demo_routes' in info:
+            routes = info['demo_routes']
+        else:
+            routes = rainbow_order
     add left_sprite
 
     hbox:
         style_prefix "custom"
         pos (796, 731)
 
-        textbutton _("NAH  ") action Jump("select_screen") style style.text_button[first_character]
-        textbutton _("SEND") action Return(second_character) style style.text_button[first_character]
+        textbutton _("NAH  "):
+            action [SetVariable("first_character", first_char),
+                    SetVariable("hovered_variable", first_char),
+                    SetVariable("second_character", ""),
+                    SetVariable("second_hovered_variable", ""),
+                    Jump("select_screen")]
+            style style.text_button[first_character]
+        textbutton _("SEND"):
+            action Return(second_character)
+            style style.text_button[first_character]
 
     vpgrid:
         pos (796, 240)
@@ -256,13 +268,10 @@ screen second_character_select_screen(first_char):
         yspacing 0
         xspacing -5
         style_prefix "select_icon"
-        $ num_cols = 3
-        $ num_rows = (len(rainbow_order) - 1) / num_cols
         $ i = 0
-        for char in rainbow_order:
+        for char in routes:
             if char != first_char:
                 textbutton _(""):
-                    #pos (row * 100,  col * 80)
                     action [ToggleVariable("second_character", true_value=char, false_value=""), SetVariable("second_hovered_variable", char)]
                     hovered SetVariable("second_hovered_variable", char)
                     unhovered SetVariable("second_hovered_variable", second_character)
