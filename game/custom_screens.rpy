@@ -103,8 +103,9 @@ define sprite_not_found = Image(im.MatrixColor("sprites/Anoki/anoki_annoyed.png"
     im.matrix.desaturate()))
 
 define no_second_character = Image("gui/splits/bg_cs2_dark.png")
+define no_first_character = Image("gui/flattened_character_select/bg_null.png")
 
-default first_character = "Malik"
+default first_character = ""
 default hovered_variable = first_character
 default second_character = ""
 default second_hovered_variable = second_character
@@ -195,15 +196,22 @@ define gui.custom_button_text_xalign = 0.0
 screen character_hover(character):
     style_prefix "char_hover"
     python:
-        info = character_structs[character]
-        bg = info['bg']
+        if character == "":
+            bg = no_first_character
+        else:
+            info = character_structs[character]
+            bg = info['bg']
     add bg
     hbox:
         style_prefix "custom"
         pos (756, 960)
 
-        textbutton _("CANCEL") action MainMenu() style style.text_button[character]
-        textbutton _("CONFIRM") action Return(character) style style.text_button[character]
+
+        if (character == ""):
+            textbutton _("CANCEL") action MainMenu() style style.text_button["Malik"]
+        else:
+            textbutton _("CANCEL") action MainMenu() style style.text_button[character]
+            textbutton _("CONFIRM") action Return(character) style style.text_button[character]
 
     button action MainMenu() style style.back_button[character]:
         pos (193, 960)
@@ -221,7 +229,7 @@ screen first_character_select_screen():
             vbox:
                 frame style "empty_frame":
                     textbutton _(" "):
-                        action [SetVariable("first_character", char), SetVariable("hovered_variable", char)]
+                        action [ToggleVariable("first_character", true_value=char, false_value=""), SetVariable("hovered_variable", char)]
                         hovered SetVariable("hovered_variable", char)
                         unhovered SetVariable("hovered_variable", first_character)
                         style style.select_icon_button[char]
