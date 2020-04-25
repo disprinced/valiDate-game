@@ -111,6 +111,7 @@ default second_hovered_variable = second_character
 
 init python:
     print ("in init")
+    renpy.audio.music.register_channel("movie_channel", renpy.config.movie_mixer, loop=True, stop_on_mute=False, movie=True, framedrop=False)
     import math
     def custom_hue_shifter(hue):
         h = hue * math.pi / 180
