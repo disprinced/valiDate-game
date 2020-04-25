@@ -10,11 +10,14 @@ image bg isa_malik_date_1:
 image bg bobeyes:
     "backgrounds/vtg_bg_cut_danibop-01.png"
 
-image bg red_lobster:
+image bg red_lobster_outside:
     "backgrounds/vtg_ppl_b_dither.png"
 
+image bg red_lobster_inside:
+    "backgrounds/vtg_bg_cut_lisacafe2.png"
+
 image bg car:
-    "backgrounds/vtg_geo_combo.png"
+    "backgrounds/vtg_bg_cut_voidcity3.png"
 
 image bg isa_house:
     "backgrounds/vtg_gta_combo.png"

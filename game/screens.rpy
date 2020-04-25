@@ -356,7 +356,7 @@ style navigation_button_text:
 # TODO, replace movies with the different character movies
 define menu_movies = [
     "gui/main_menu/splash_nologo.webm",
-    "gui/main_menu/test.webm",
+    #"gui/main_menu/test.webm",
 ]
 image movie_test = Movie(play=menu_movies, channel="movie_channel", loop=True)
 image menu_still = "gui/main_menu/stringles_splash_test.png"

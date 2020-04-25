@@ -8,8 +8,10 @@ init python:
 
 # probably should also be in italics
 define reader = Character("", what_font="gui/fonts/Dosis-Medium.otf")
+define unknown =  Character("?????", what_font="gui/fonts/Dosis-Medium.otf")
 
 define audio.bad_end = "audio/030120_vtg_badend.mp3"
+define audio.good_end = "audio/030120_vtg_badend.mp3"
 image bg to_be_continued:
     "endings/to_be_continued.png"
 

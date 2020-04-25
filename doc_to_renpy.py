@@ -1,5 +1,5 @@
 
-def read_text_to_renpy(in_file, out_file):
+def read_text_to_renpy(in_file, out_file, who=None):
   previous_name = ""
   # assume delineated by new lines
   with open(in_file, 'r') as fp:
@@ -11,7 +11,7 @@ def read_text_to_renpy(in_file, out_file):
 
         # If there isn't a colon, then assume it's an inner thought
         if colon_index == -1:
-          name = "reader"
+          name = who if who else "reader"
           dialogue = line[:-1]
         else:
           name = line[:colon_index].strip().lower()
@@ -20,6 +20,8 @@ def read_text_to_renpy(in_file, out_file):
         # remove non ascii characters:
         dialogue = dialogue.decode("utf-8").replace(u"\u2019", "'")
         dialogue = dialogue.replace(u"\u2026", "...")
+        dialogue = dialogue.replace(u"\u201c",'\\"')
+        dialogue = dialogue.replace(u"\u201d",'\\"')
         dialogue = dialogue.replace('"', '\\"')
         dialogue = dialogue.replace('%', '\\%')
 
