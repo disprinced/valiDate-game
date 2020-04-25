@@ -16,9 +16,9 @@ image bg to_be_continued:
 image bg test_background:
     "backgrounds/chick_fil_a.jpg"
 
-
 ### CODE FOR ONE SCREEN AT A TIME
 label start:
+
     stop music fadeout 1.0
 
     scene black

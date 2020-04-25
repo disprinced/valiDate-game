@@ -353,8 +353,36 @@ style navigation_button_text:
 ## Used to display the main menu when Ren'Py starts.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
+# TODO, replace movies with the different character movies
+define menu_movies = [
+    "gui/main_menu/splash_nologo.webm",
+    "gui/main_menu/test.webm",
+]
+image movie_test = Movie(play=menu_movies, channel="movie_channel", loop=True)
+image menu_still = "gui/main_menu/stringles_splash_test.png"
+
+
 
 screen main_menu():
+
+    tag menu
+
+    style_prefix "main_menu"
+
+    frame:
+        pass
+
+    python:
+        import random
+        renpy.random.shuffle(menu_movies)
+
+    add "movie_test"
+    add "menu_still"
+
+    use navigation
+
+
+screen main_menu_2():
 
     ## This ensures that any other menu screen is replaced.
     tag menu
