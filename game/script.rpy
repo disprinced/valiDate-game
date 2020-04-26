@@ -10,13 +10,17 @@ init python:
 define reader = Character("", what_font="gui/fonts/Dosis-Medium.otf")
 define unknown =  Character("?????", what_font="gui/fonts/Dosis-Medium.otf")
 
+
 define audio.bad_end = "audio/030120_vtg_badend.mp3"
 define audio.good_end = "audio/030120_vtg_badend.mp3"
+
 image bg to_be_continued:
     "endings/to_be_continued.png"
 
 image bg test_background:
     "backgrounds/chick_fil_a.jpg"
+
+define demo = True
 
 ### CODE FOR ONE SCREEN AT A TIME
 label start:
@@ -69,6 +73,13 @@ label select_screen:
 label unimplemented(char1, char2):
     scene bg to_be_continued
     show text "[char1] and [char2]'s route hasn't been implemented/written yet!"
+    window hide
+    pause
+    return
+
+label demo_over:
+    scene black
+    show text "Find out what happens next in the full game!"
     window hide
     pause
     return

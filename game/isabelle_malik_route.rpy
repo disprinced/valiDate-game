@@ -283,6 +283,10 @@ label IsaMalikPerform:
 
     reader "A date. You haven't been on a date in... years probably. And with a guy you met less than 24 hours ago? Maybe today wasn't as bad of a day as you thought it would be."
 
+    if demo:
+        jump demo_over
+        return
+
     ### DATE 1
     scene bg red_lobster_outside with fade
 
