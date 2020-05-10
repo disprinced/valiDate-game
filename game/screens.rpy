@@ -129,14 +129,13 @@ style say_thought is say_dialogue
 style namebox is default
 style namebox_label is say_label
 
-
 style window:
     xalign 0.5
     xfill True
     yalign gui.textbox_yalign
     ysize gui.textbox_height
 
-    background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
+    background Image("gui/dialoglog/dialog_bg_wide_sheared.png", xalign=0.5, yalign=1.0)
 
 style namebox:
     xpos gui.name_xpos
@@ -240,6 +239,67 @@ style choice_button_text is default:
 ## The quick menu is displayed in-game to provide easy access to the out-of-game
 ## menus.
 
+define no_quick_menu = [
+    'first_character_select_screen',
+    'second_character_select_screen',
+
+]
+
+screen custom_quick_menu():
+    python:
+        if hovered_variable == "":
+            char = "Anoki"
+        else:
+            char = hovered_variable
+    zorder 100
+
+    if quick_menu and not renpy.get_screen(no_quick_menu) :
+        hbox:
+            spacing 10
+            xalign 0.5
+            yalign 1.0
+            textbutton _(" ") :
+                xsize 90
+                ysize 90
+                style style.qload_button[char]
+                action QuickLoad()
+            textbutton _(" "):
+                xsize 90
+                ysize 90
+                style style.qsave_button[char]
+                action QuickSave()
+            textbutton _(""):
+                xsize 90
+                ysize 90
+                style style.story_back_button[char]
+                action Rollback()
+            textbutton _(""):
+                xsize 90
+                ysize 90
+                style style.history_button[char]
+                action ShowMenu('history')
+            textbutton _(""):
+                xsize 90
+                ysize 90
+                style style.auto_button[char]
+                action Preference("auto-forward", "toggle")
+            textbutton _(""):
+                xsize 90
+                ysize 90
+                style style.skip_button[char]
+                action Skip()
+                alternate Skip(fast=True, confirm=True)
+            textbutton _(""):
+                xsize 90
+                ysize 90
+                style style.save_button[char]
+                action ShowMenu('save')
+            textbutton _(""):
+                xsize 90
+                ysize 90
+                style style.preference_button[char]
+                action ShowMenu('preferences')
+
 screen quick_menu():
 
     ## Ensure this appears on top of other screens.
@@ -262,13 +322,13 @@ screen quick_menu():
             textbutton _("Q.Save") action QuickSave()
             textbutton _("Q.Load") action QuickLoad()
             textbutton _("Prefs") action ShowMenu('preferences')
-            textbutton "Editing Mode" action #ToggleScreen("renedit_overlay")
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
 init python:
-    config.overlay_screens.append("quick_menu")
+    config.overlay_screens.append("custom_quick_menu")
+    #config.overlay_screens.append("quick_menu")
 
 default quick_menu = True
 
@@ -364,7 +424,7 @@ image menu_still = "gui/main_menu/stringles_splash_test.png"
 
 
 screen main_menu():
-
+    $ quick_menu = False
     tag menu
 
     style_prefix "main_menu"
@@ -382,7 +442,7 @@ screen main_menu():
     use navigation
 
 
-screen main_menu_2():
+screen main_menu_old():
 
     ## This ensures that any other menu screen is replaced.
     tag menu
@@ -449,6 +509,7 @@ style main_menu_version:
 
 screen game_menu(title, scroll=None, yinitial=0.0):
 
+    $ quick_menu = False
     style_prefix "game_menu"
 
     if main_menu:

@@ -20,19 +20,31 @@ image bg to_be_continued:
 image bg test_background:
     "backgrounds/chick_fil_a.jpg"
 
+image bg demo_over:
+    "endings/buyvalidate.png"
+
+image movie_background = Movie(play="gui/main_menu/prelude.webm", size=(1920, 1080), xpos=0, ypos=0, xanchor=0, yanchor=0)
+
 define demo = True
 
-### CODE FOR ONE SCREEN AT A TIME
-label start:
+label splashscreen:
+    $ quick_menu = False
+    show movie_background with dissolve
 
-    stop music fadeout 1.0
-
-    scene black
     reader "The sun casts over a cold Jersey City day, the wind isn't blowing as hard as it usually does, but you still find yourself hugging your coat a bit closer to your body to shield yourself from the cold. You duck into the hair salon you have been directed to by a friend. The warm heat of a space heater fills your body the moment you step in."
     reader "You don't have a name, at least not yet. But you do have an interest for poetry and the art of hearing people speak their feelings over the occasional chill hip-hop beat."
     reader "The room is dark, all lights pointed towards the area in the far back that sort of looks like a makeshift stage. The room is full of faces you've never seen before, faces so warm yet distraught? Did you just walk into a cult?"
     reader "You decide to sit yourself in the corner, pulling out your phone to text one of your friends, maybe they will help you in your time of need."
     reader "Who will you text?"
+
+    hide movie_background with dissolve
+
+    return
+
+### CODE FOR ONE SCREEN AT A TIME
+label start:
+
+    stop music fadeout 1.0
 
     #play theme_music "audio/022320_vtg_charsel.mp3"
 
@@ -60,6 +72,7 @@ label select_screen:
 
     call screen second_character_select_screen(_return) with fade
     $ char2 = _return
+    $ quick_menu = True
 
     if renpy.has_label(char1 + char2):
         $renpy.call(char1 + char2)
@@ -78,8 +91,7 @@ label unimplemented(char1, char2):
     return
 
 label demo_over:
-    scene black
-    show text "Find out what happens next in the full game!"
+    scene bg demo_over
     window hide
     pause
     return

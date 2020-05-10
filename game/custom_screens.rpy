@@ -7,7 +7,7 @@ define rainbow_order = [
  'Isabelle',
  'Anoki',
  'Arihi',
-#    'Catherine',
+#'Catherine',
  #'Inaya',
  'Ashlie',
  'Malik']
@@ -171,7 +171,47 @@ init python:
         style.phone_icon_button[char].selected_idle_background = \
             Image("gui/contacts/ct_%s_select.png" % (char_lower))
 
+        style.qsave_button[char].background = \
+            im.MatrixColor("gui/dialoglog/button_qsave.png", custom_hue_shifter(val['hue']))
+        style.qsave_button[char].hover_background = \
+            im.MatrixColor("gui/dialoglog/button_qsave_hover.png", custom_hue_shifter(val['hue']))
 
+        style.qload_button[char].background = \
+            im.MatrixColor("gui/dialoglog/button_qload.png", custom_hue_shifter(val['hue']))
+        style.qload_button[char].hover_background = \
+            im.MatrixColor("gui/dialoglog/button_qload_hover.png", custom_hue_shifter(val['hue']))
+
+        style.story_back_button[char].background = \
+            im.MatrixColor("gui/dialoglog/button_back.png", custom_hue_shifter(val['hue']))
+        style.story_back_button[char].hover_background = \
+            im.MatrixColor("gui/dialoglog/button_back_hover.png", custom_hue_shifter(val['hue']))
+
+        style.history_button[char].background = \
+            im.MatrixColor("gui/dialoglog/button_history.png", custom_hue_shifter(val['hue']))
+        style.history_button[char].hover_background = \
+            im.MatrixColor("gui/dialoglog/button_history_hover.png", custom_hue_shifter(val['hue']))
+
+        style.skip_button[char].background = \
+            im.MatrixColor("gui/dialoglog/button_skip.png", custom_hue_shifter(val['hue']))
+        style.skip_button[char].hover_background = \
+            im.MatrixColor("gui/dialoglog/button_skip_hover.png", custom_hue_shifter(val['hue']))
+
+        style.auto_button[char].background = \
+            im.MatrixColor("gui/dialoglog/button_auto.png", custom_hue_shifter(val['hue']))
+        style.auto_button[char].hover_background = \
+            im.MatrixColor("gui/dialoglog/button_auto_hover.png", custom_hue_shifter(val['hue']))
+        style.auto_button[char].selected_background = \
+            im.MatrixColor("gui/dialoglog/button_auto_active.png", custom_hue_shifter(val['hue']))
+
+        style.save_button[char].background = \
+            im.MatrixColor("gui/dialoglog/button_save.png", custom_hue_shifter(val['hue']))
+        style.save_button[char].hover_background = \
+            im.MatrixColor("gui/dialoglog/button_save_hover.png", custom_hue_shifter(val['hue']))
+
+        style.preference_button[char].background = \
+            im.MatrixColor("gui/dialoglog/button_preferences.png", custom_hue_shifter(val['hue']))
+        style.preference_button[char].hover_background = \
+            im.MatrixColor("gui/dialoglog/button_preferences_hover.png", custom_hue_shifter(val['hue']))
         style.text_button[char].xpadding = 50
         style.text_button[char].ypadding = 20
         style.text_button_text[char].color = "#fff"
@@ -191,7 +231,6 @@ init python:
 ## The horizontal alignment of the button text. (0.0 is left, 0.5 is center, 1.0
 ## is right).
 define gui.custom_button_text_xalign = 0.0
-
 
 screen character_hover(character):
     style_prefix "char_hover"
@@ -221,18 +260,21 @@ screen character_hover(character):
 
 screen first_character_select_screen():
     use character_hover(hovered_variable)
+    $ quick_menu = False
+
 
     hbox:
-        pos(495, 705)
+        xalign 0.5
+        yalign 0.8
         for i, char in enumerate(rainbow_order):
             $ has_demo_route = 'demo_routes' in character_structs[char]
-            vbox:
-                frame style "empty_frame":
-                    textbutton _(" "):
-                        action [ToggleVariable("first_character", true_value=char, false_value=""), SetVariable("hovered_variable", char)]
-                        hovered SetVariable("hovered_variable", char)
-                        unhovered SetVariable("hovered_variable", first_character)
-                        style style.select_icon_button[char]
+            textbutton _(" "):
+                yoffset -20
+                ysize 180
+                action [ToggleVariable("first_character", true_value=char, false_value=""), SetVariable("hovered_variable", char)]
+                hovered SetVariable("hovered_variable", char)
+                unhovered SetVariable("hovered_variable", first_character)
+                style style.select_icon_button[char]
 
 
 screen second_character_hover(character):
@@ -244,6 +286,7 @@ screen second_character_hover(character):
     add right_sprite
 
 screen second_character_select_screen(first_char):
+
     style_prefix "char_hover"
     use second_character_hover(second_hovered_variable)
     python:
