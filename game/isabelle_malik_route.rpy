@@ -16,7 +16,13 @@ image bg isa_malik_good:
 
 label IsabelleMalik:
     scene black
-    #play theme_music isabelle_theme
+    stop music fadeout 1.0
+    play theme_music isabelle_theme
+    $ renpy.movie_cutscene("gui/main_menu/openingcredits.webm")
+    scene black with dissolve
+
+    #$ achievement.grant("test")
+    #$ achievement.Sync()
 
     reader "You aren't sure where you're going as you leave your house. Not really in the mood to deal with public transit or taxis, you walk into the buiser part of your neighborhood with no real destination in mind."
     reader"You don't have to be in the theater until late this afternoon for a dress rehearsal. You love the theater life, but god damn, you are just *not* in the mood to deal with people like yourself -- people who refused to grow out of their theater phase of high school."

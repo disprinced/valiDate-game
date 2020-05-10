@@ -214,7 +214,6 @@ define gui.choice_button_text_idle_color = "#555555"
 define gui.choice_button_text_hover_color = "#ffffff"
 define gui.choice_button_text_insensitive_color = "#444444"
 
-
 ## File Slot Buttons ###########################################################
 ##
 ## A file slot button is a special kind of button. It contains a thumbnail

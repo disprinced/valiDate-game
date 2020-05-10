@@ -4,7 +4,10 @@
 # name of the character.
 
 init python:
+#    achievement.register("test", steam="test123")
+#    achievement.Sync()
     renpy.music.register_channel("theme_music", "music", loop=True, tight=True)
+    achievement.steam_position = "top right"
 
 # probably should also be in italics
 define reader = Character("", what_font="gui/fonts/Dosis-Medium.otf")
@@ -46,7 +49,7 @@ label start:
 
     stop music fadeout 1.0
 
-    #play theme_music "audio/022320_vtg_charsel.mp3"
+    play theme_music "audio/022320_vtg_charsel.mp3"
 
     #$ renpy.profile_screen(_("first_character_select_screen"), show=True, update=True, time=True, debug=True)
     jump select_screen
