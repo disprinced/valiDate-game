@@ -419,10 +419,29 @@ define menu_movies = [
     "gui/main_menu/splash_nologo.webm",
     #"gui/main_menu/test.webm",
 ]
+
+# define prelude_movies = [
+#     "gui/main_menu/prelude_example_a.webm",
+#     "gui/main_menu/prelude_example_b.webm",
+#     "gui/main_menu/prelude_example_c.webm",
+#     "gui/main_menu/prelude_example_d.webm",
+# ]
 image movie_test = Movie(play=menu_movies, channel="movie_channel", loop=True)
+# image prelude_test = Movie(play=prelude_movies, channel="movie_channel", loop=True)
+
+
+default preferences.text_cps = 1000
+
 image menu_still = "gui/main_menu/stringles_splash_test.png"
 
 
+transform show_hide_dissolve:
+    on show:
+        alpha .0
+        linear .25 alpha 1.0
+    on hide:
+        alpha 1.0
+        linear .5 alpha .0
 
 screen main_menu():
     $ quick_menu = False
@@ -434,10 +453,11 @@ screen main_menu():
         pass
 
     python:
-        import random
         renpy.random.shuffle(menu_movies)
 
-    add "movie_test"
+    add "black"
+    add "movie_test" at show_hide_dissolve
+    #add "movie_test"
     add "menu_still"
 
     use navigation

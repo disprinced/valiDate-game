@@ -1,9 +1,9 @@
 define rainbow_order = [
- 'Emhari',
+# 'Emhari',
  #'Bigs',
- 'Yolanda',
- 'Rocky',
- 'Alonzo',
+# 'Yolanda',
+# 'Rocky',
+# 'Alonzo',
  'Isabelle',
  'Anoki',
  'Arihi',
@@ -15,59 +15,79 @@ define rainbow_order = [
 define character_structs = {
     "Malik": {
         "hue": 335,
+        "color": "#A30748",
         "demo_routes": ['Isabelle', 'Anoki', 'Arihi'],
+        "sprite_pos": (154, 52),
+        "select_sprite": "casual1",
         "intro": "Failed rap career aside, this man still owes you a free chicken sandwich. Maybe you should hit him up to see if you can cash in on that."
     },
     "Ashlie": {
         "hue": 320,
+        "color": "#E650B4",
         "demo_routes": ['Isabelle'],
-        "sprite_pos": (150, 30, 0.70),
+        "sprite_pos": (214, 153),
+        "select_sprite": "normal",
         "intro": "New Jersey’s number one twitch streamer and she can hardly keep a relationship. Or a friendship for that matter. Maybe you should check on her?"
     },
     # add Inaya
     "Catherine": {
         "hue": 270,
-        "sprite_pos": (10, 80, 0.5),
-        "flip": True,
+        "color": "#4D0099",
+        "sprite_pos": (133, 35),
+        "select_sprite": "neutral",
         "intro": "Your favorite fashionista is probably entirely too busy talking shit about whatever the Kardashians wore to reply to you. Maybe you caught her in a good mood."
     },
     "Arihi": {
         "hue": 215,
+        "color": "#002B66",
         "demo_routes": ['Malik'],
-        "sprite_pos": (100, 40, 0.5),
+        "sprite_pos": (203, 109),
+        "select_sprite": "arms_neutral",
         "intro": "You know he has a habit to try to fix everyone, being a therapist and all. But has he really tried to put that on his partners?"
     },
     "Anoki": {
         "hue": 175,
+        "color": "#39E5D7",
         "demo_routes": ['Malik'],
-        "sprite_pos": (-150, 70, 0.5),
+        "sprite_pos": (94, 203),
+        "select_sprite": "casual",
         "intro": "The last time you spoke to them you got into a heated argument about the importance of elf ears in an elf cosplay. You wonder if they brought that fight to their new partner?"
     },
     "Isabelle": {
         "hue": 150,
+        "color": "#22E584",
         "demo_routes": ['Malik', 'Ashlie'],
-        "sprite_pos": (-100, 80, 0.40),
+        "sprite_pos": (2, 81),
+        "select_sprite": "neutral",
         "intro": "You miss the sweet sound of Hamilton in your ear, you wonder how she’s been doing with that one person she was talking about the last time you spoke."
     },
     "Alonzo": {
         "hue": 80,
-        "sprite_pos": (100, 30, 0.525),
+        "color": "#6B8E23",
+        "sprite_pos": (76, 146),
+        "select_sprite": "default",
         "intro": "You wonder how long it’ll take to get a response from Alonzo, you know his fuckboy tendencies often lead him to forgetting to reply to a text from an old friend."
     },
     "Rocky": {
         "hue": 56,
-        "sprite_pos": (0, 0, 0.6),
+        "sprite_pos": (132, 38),
+        "color": "#F6E700",
+        "select_sprite": "happy",
         "intro": "You wonder if he got his controlling nature under control. You remember it wrecking the last relationships he had."
     },
     "Yolanda": {
         "hue": 40,
-        "sprite_pos": (-250, 80, 0.5),
+        "color": "#F2A711",
+        "sprite_pos": (143, 127),
+        "select_sprite": "neutral",
         "intro": "You probably caught her in the middle of a hair appointment, even though she typically is sweet enough to remind you of that."
     },
     # add Bigs
     "Emhari": {
         "hue": 6,
-        "sprite_pos": (-130, 0, 1),
+        "color": "#CB4335",
+        "sprite_pos": (224, 48),
+        "select_sprite": "neutral",
         "intro": "You never understood why he needed 7 different weddings rings despite only wanting to marry one person. Maybe he finally found the one?"
     },
 }
@@ -134,25 +154,19 @@ init python:
             0, 0, 0, 1, 0,
             0, 0, 0, 0, 1)
 
+
     for char, val in character_structs.iteritems():
         char_lower = char.lower()
-        # val['bg'] = Image("gui/character_select/bg_%s.png" % (char_lower))
-        # val['stats'] = Image("gui/character_select/stats_%s.png" % (char_lower))
-        # val['name_title'] = Image("gui/character_select/tex_%s.png" % (char_lower))
-        # val['emblem'] = Image("gui/character_select/emblem_%s.png" % (char_lower))
-
-        # TODO remove extra values in struct because gui was flattened.
-        val['bg'] = Image("gui/flattened_character_select/charsel_%s.png" % char_lower)
+        val['bg'] = Image("gui/first_character_select/bg_%s_full.png" % char_lower)
+        val['name_title'] = Image("gui/first_character_select/bg_%s_text.png" % char_lower)
+        val['sprite'] = Image("sprites/%s/%s_std_%s.png" %
+            (char_lower, char_lower, val['select_sprite']))
         val['left_sprite'] = Image("gui/splits/ds_%s_L.png" % (char_lower))
         val['right_sprite'] = Image("gui/splits/ds_%s_R.png" % (char_lower))
-        if "sprite_pos" not in val:
-            val['sprite'] = sprite_not_found
-        else:
-            val['sprite'] = Image("sprites/%s/%s_Neutral.png" % (char, char))
 
         if 'flip' in val:
             val['sprite'] = im.Flip(val['sprite'], horizontal=True)
-        val['shadow'] = im.MatrixColor(val['sprite'], im.matrix.brightness(-1))
+        val['shadow'] = AlphaMask(Solid(val['color']), val['sprite'])
 
         phone_sprite = "gui/character_select/cs1_%s.png" % (char)
         style.select_icon_button[char].background = \
@@ -240,16 +254,30 @@ screen character_hover(character):
         else:
             info = character_structs[character]
             bg = info['bg']
+            name_title = info['name_title']
+            shadow = info['shadow']
+            sprite = info['sprite']
+            x, y = info['sprite_pos']
+            shadow_x = x - 25
+            shadow_y = y + 10
     add bg
+
+    if character != "":
+        add shadow:
+            pos (x, y)
+        add sprite:
+            pos (shadow_x, shadow_y)
+        add name_title:
+            pos(540, 0)
+
     hbox:
         style_prefix "custom"
         pos (756, 960)
 
-
         if (character == ""):
-            textbutton _("CANCEL") action MainMenu() style style.text_button["Malik"]
+            textbutton _("CANCEL") action [SetVariable("first_character", ""), MainMenu()] style style.text_button["Malik"]
         else:
-            textbutton _("CANCEL") action MainMenu() style style.text_button[character]
+            textbutton _("CANCEL") action [SetVariable("first_character", ""), MainMenu()] style style.text_button[character]
             textbutton _("CONFIRM") action Return(character) style style.text_button[character]
 
     button action MainMenu() style style.back_button[character]:

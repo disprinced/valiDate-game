@@ -1,15 +1,15 @@
 
 image bg isa_bar_gameover:
-    "endings/ISAGAMEOVER1.jpg"
+    "endings/ISABELLEMALIK_GAMEOVER1.jpg"
 
 image bg isa_malik_rap:
-    "endings/ISAGAMEOVER2.jpg"
+    "endings/ISABELLEMALIK_GAMEOVER2.jpg"
 
 image bg isa_malik_loser:
-    "endings/ISAGAMEOVER3.png"
+    "endings/ISABELLEMALIK_GAMEOVER3.png"
 
 image bg isa_malik_inside:
-    "endings/ISAGAMEOVER4.png"
+    "endings/ISABELLEMALIK_GAMEOVER4.png"
 
 image bg isa_malik_good:
     "endings/isabelle_end_scene_draft1.png"
@@ -73,7 +73,6 @@ label IsaMalikBopeyes:
         xalign 0.0
         linear 0.5 xalign 0.1
 
-
     isabelle "So I’m thinking that I want a drown down some dry biscuits with a shot of tequila? "
 
     show malik distracted
@@ -86,8 +85,7 @@ label IsaMalikBopeyes:
 
     reader "Jesus lord, you're so fucking lame. Maybe you need to stop spending so much time around 12 year olds and more time around your friends."
 
-
-    show malik casual
+    show malik casual 2
     unknown "So what can I get for you? It's Tuesday, we've got a special - 2 wings, fries and a biscuit for $3."
 
     show isabelle disgust
@@ -129,7 +127,7 @@ label IsaMalikBopeyes:
 
     reader "Singing at random times is a hobby of yours. Maybe it's just the theater girl in you. The high note shifts your glasses ever so slightly, and you push them back up the bridge of your nose. You didn't mean to tilt your head back that far."
 
-    show malik casual
+    show malik casual 1
     malik "Singing? So like, you do musicals and shit?"
 
     reader "Your face lights up like a tree in a Christmas card. It's rare for random strangers to ask you about your musical talents. People typically laugh or, in worse cases, give you an eyeroll."
@@ -156,7 +154,7 @@ label IsaMalikBopeyes:
 
 label IsaMalikBar:
     # TODO change to bar scene.
-    scene bg bobeyes with dissolve
+    scene bg bobeyes_bar with dissolve
     reader "You decide you could go for a drink first, maybe grab some overly greasy chicken afterwards to help sober you up before you have to deal with a bunch of elementary school kids messing up the lines they should have memorized a month ago."
     reader "The bar is mostly empty. You take a seat near the bartender, sparking up some conversation after ordering your drink. Maybe you'll go for something light, a Grapefruit Mimosa to keep the day tarte. Whatever the fuck that means - your bartender recommended it to you."
     reader "You sip at your drink as you glance out the window, watching the world pass you by."
@@ -179,7 +177,7 @@ label IsaMalikPerform:
 
     show malik embarrassed
     malik "Oh shit, yeah. Uh."
-    show malik casual
+    show malik casual 1
     malik "Uh, so I don't have a copy on me today. But, uh. If you give me your number or, snapchat I can send you a link to my soundcloud so you can take a listen."
 
     show isabelle happy
@@ -191,7 +189,7 @@ label IsaMalikPerform:
     show isabelle texting
     isabelle "Save your number and text yourself so you can have mine!"
 
-    show malik casual
+    show malik casual 2
     malik "Oh shit, yeah. Sure I will. Hey, order whatever you want. It's on me. I guess you can get a manager's discount. Anything for a future fan."
 
     show isabelle happy2
@@ -341,7 +339,7 @@ label IsaMalikPerform:
     show malik flustered
     malik "Uh..."
 
-    show malik casual
+    show malik casual 1
     malik "No, I really don't eat much seafood. My dad didn't really let us when we were younger and I never grew out of it."
 
     show isabelle happy:
@@ -419,6 +417,7 @@ label IsaMalikPerform:
             jump IsaMalikAwesome
         "You don't know about theater life? Are you one of the types who think us theater folks are a bunch of fucking losers?":
             jump IsaMalikLoser
+    return
 
 label IsaMalikRap:
     isabelle "Do you like rap too? I know sooo many rappers, a lot of them are… pretty bad."
@@ -485,7 +484,7 @@ label IsaMalikAwesome:
 
     isabelle "I tried to make music once, I understand why you don't make your own."
 
-    show malik casual
+    show malik casual 2
     malik "Haha, yeah. So I do more of the scene shit. I write all my raps, no influence from anyone. Well. I guess the women I interact with are my muse."
 
     show isabelle flirty:
@@ -627,7 +626,7 @@ label IsaMalikHeadInside:
     show isabelle annoyed
     isabelle "As much as I would love to do that, I have annoying little siblings who love to play with my shit when I'm gone too long."
 
-    show malik casual
+    show malik casual 1
     malik "Yeah. I understand."
 
     reader "He looks a little upset, and you immediately feel bad. You can tell he's really feeling you, and you're really feeling him. It's a bond you don't want to ruin, but something seems to be forcing you to."
@@ -741,7 +740,7 @@ label IsaMalikLiveAlone:
 
     isabelle "Huh? Oh yeah. I don't really get much peace at home. I still live with my family -- three sisters, a brother, my abuela and my parents. Sometimes my tio lives with us but he's with his girlfriend right now. That usually doesn't last long though."
 
-    show malik casual
+    show malik casual 2
     malik "So you have a big family too?"
 
     isabelle "Yeah! I love them, but I just need space to myself."
@@ -784,7 +783,7 @@ label IsaMalikLiveAlone:
     reader "You can't get hurt if you're the one rejecting him."
     reader "Right?"
 
-    show malik casual
+    show malik casual 1
     malik "Yeah, I get it. We can just be friends though right? I still want to see you perform."
 
     reader "Friends! You can do friends. Friends are what make the world go around. Friendship is the only constant in your life that you feel like you can control."

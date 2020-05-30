@@ -4,7 +4,7 @@
 ## Add constants related to Isabelle here
 ##
 
-define isabelle = Character("Isabelle", color="#22E584")
+define isabelle = Character("Isabelle", color="#22E584", what_font="gui/fonts/Dosis-Medium.otf")
 define audio.isabelle_theme = "audio/022520_vtg_anoki.mp3"
 
 image isabelle amused:
