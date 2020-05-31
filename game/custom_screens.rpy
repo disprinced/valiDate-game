@@ -18,7 +18,7 @@ define character_structs = {
         "color": "#A30748",
         "demo_routes": ['Isabelle', 'Anoki', 'Arihi'],
         "sprite_pos": (154, 52),
-        "select_sprite": "casual1",
+        "select_sprite": ["casual1", "confused"],
         "intro": "Failed rap career aside, this man still owes you a free chicken sandwich. Maybe you should hit him up to see if you can cash in on that."
     },
     "Ashlie": {
@@ -26,7 +26,7 @@ define character_structs = {
         "color": "#E650B4",
         "demo_routes": ['Isabelle'],
         "sprite_pos": (214, 153),
-        "select_sprite": "normal",
+        "select_sprite": ["normal", "sly"],
         "intro": "New Jersey’s number one twitch streamer and she can hardly keep a relationship. Or a friendship for that matter. Maybe you should check on her?"
     },
     # add Inaya
@@ -34,7 +34,7 @@ define character_structs = {
         "hue": 270,
         "color": "#4D0099",
         "sprite_pos": (133, 35),
-        "select_sprite": "neutral",
+        "select_sprite": ["neutral", "ng_neutral"],
         "intro": "Your favorite fashionista is probably entirely too busy talking shit about whatever the Kardashians wore to reply to you. Maybe you caught her in a good mood."
     },
     "Arihi": {
@@ -42,7 +42,7 @@ define character_structs = {
         "color": "#002B66",
         "demo_routes": ['Malik'],
         "sprite_pos": (203, 109),
-        "select_sprite": "arms_neutral",
+        "select_sprite": ["arms_neutral", "special"],
         "intro": "You know he has a habit to try to fix everyone, being a therapist and all. But has he really tried to put that on his partners?"
     },
     "Anoki": {
@@ -50,7 +50,7 @@ define character_structs = {
         "color": "#39E5D7",
         "demo_routes": ['Malik'],
         "sprite_pos": (94, 203),
-        "select_sprite": "casual",
+        "select_sprite": ["casual", "special"],
         "intro": "The last time you spoke to them you got into a heated argument about the importance of elf ears in an elf cosplay. You wonder if they brought that fight to their new partner?"
     },
     "Isabelle": {
@@ -58,28 +58,28 @@ define character_structs = {
         "color": "#22E584",
         "demo_routes": ['Malik', 'Ashlie'],
         "sprite_pos": (2, 81),
-        "select_sprite": "neutral",
+        "select_sprite": ["neutral", "special"],
         "intro": "You miss the sweet sound of Hamilton in your ear, you wonder how she’s been doing with that one person she was talking about the last time you spoke."
     },
     "Alonzo": {
         "hue": 80,
         "color": "#6B8E23",
         "sprite_pos": (76, 146),
-        "select_sprite": "default",
+        "select_sprite": ["default", "camera"],
         "intro": "You wonder how long it’ll take to get a response from Alonzo, you know his fuckboy tendencies often lead him to forgetting to reply to a text from an old friend."
     },
     "Rocky": {
         "hue": 56,
         "sprite_pos": (132, 38),
         "color": "#F6E700",
-        "select_sprite": "happy",
+        "select_sprite": ["happy", "neutral"],
         "intro": "You wonder if he got his controlling nature under control. You remember it wrecking the last relationships he had."
     },
     "Yolanda": {
         "hue": 40,
         "color": "#F2A711",
         "sprite_pos": (143, 127),
-        "select_sprite": "neutral",
+        "select_sprite": ["neutral", "special"],
         "intro": "You probably caught her in the middle of a hair appointment, even though she typically is sweet enough to remind you of that."
     },
     # add Bigs
@@ -87,7 +87,7 @@ define character_structs = {
         "hue": 6,
         "color": "#CB4335",
         "sprite_pos": (224, 48),
-        "select_sprite": "neutral",
+        "select_sprite": ["neutral", "suggestive"],
         "intro": "You never understood why he needed 7 different weddings rings despite only wanting to marry one person. Maybe he finally found the one?"
     },
 }
@@ -129,6 +129,7 @@ default first_character = ""
 default hovered_variable = first_character
 default second_character = ""
 default second_hovered_variable = second_character
+image i_luv_mice = Fixed(Solid("F00", xysize=(150, 50)), Solid("FFF", xysize=(100, 50)), xysize=(150, 50))
 
 init python:
     print ("in init")
@@ -154,19 +155,63 @@ init python:
             0, 0, 0, 1, 0,
             0, 0, 0, 0, 1)
 
+    CENTER_AT = (400, 400)
+    char_time = 6.0
+    i = 0
+    tim = 0.0
+    def char_transition(st, at, char):
+        global i, tim
+        val = character_structs[char]
+        char_lower = char.lower()
+        d = Image("sprites/%s/%s_std_%s.png" %
+            (char_lower, char_lower, val['select_sprite'][i]))
+        tim += 0.1
+        blah = abs(math.sin((tim % char_time) / char_time * 2 * math.pi))
+        if round(blah, 2) == 1.0:
+            tim = char_time / 2
+            i = (i + 1) % 2
+            return d, char_time
+        return Transform(d, alpha=blah), 0.1
+
+    def shadow_transition(st, at, char):
+        global i, tim
+        val = character_structs[char]
+        char_lower = char.lower()
+        d = Image("sprites/%s/%s_std_%s.png" %
+            (char_lower, char_lower, val['select_sprite'][i]))
+        d = im.FactorScale(val['sprite'], 1.08, bilinear=True)
+        d = AlphaMask(Solid(val['color']), d)
+        tim += 0.1
+        blah = abs(math.sin((tim % char_time) / char_time * 2 * math.pi))
+        if round(blah, 2) == 1.0:
+            tim = char_time / 2
+            i = (i + 1) % 2
+            return d, char_time
+        return Transform(d, alpha=blah), 0.1
+
+    def char_transition2(st, at, char):
+        val = character_structs[char]
+        char_lower = char.lower()
+        i = int(st/ char_time * 2) % len(val['select_sprite'])
+        d = Image("sprites/%s/%s_std_%s.png" %
+            (char_lower, char_lower, val['select_sprite'][i]))
+        blah = abs(math.sin((st % char_time) / char_time * 2 * math.pi))
+        return Transform(d, alpha=blah), 0.1
 
     for char, val in character_structs.iteritems():
         char_lower = char.lower()
         val['bg'] = Image("gui/first_character_select/bg_%s_full.png" % char_lower)
         val['name_title'] = Image("gui/first_character_select/bg_%s_text.png" % char_lower)
+        val['sprite_moving'] = DynamicDisplayable(char_transition, char=char)
         val['sprite'] = Image("sprites/%s/%s_std_%s.png" %
-            (char_lower, char_lower, val['select_sprite']))
+            (char_lower, char_lower, val['select_sprite'][0]))
         val['left_sprite'] = Image("gui/splits/ds_%s_L.png" % (char_lower))
         val['right_sprite'] = Image("gui/splits/ds_%s_R.png" % (char_lower))
 
         if 'flip' in val:
             val['sprite'] = im.Flip(val['sprite'], horizontal=True)
-        val['shadow'] = AlphaMask(Solid(val['color']), val['sprite'])
+        val['shadow'] = im.FactorScale(val['sprite'], 1.08, bilinear=True)
+        val['shadow'] = AlphaMask(Solid(val['color']), val['shadow'])
 
         phone_sprite = "gui/character_select/cs1_%s.png" % (char)
         style.select_icon_button[char].background = \
@@ -256,17 +301,18 @@ screen character_hover(character):
             bg = info['bg']
             name_title = info['name_title']
             shadow = info['shadow']
+            sprite_moving = info['sprite_moving']
             sprite = info['sprite']
             x, y = info['sprite_pos']
-            shadow_x = x - 25
+            shadow_x = x - 50
             shadow_y = y + 10
     add bg
 
     if character != "":
         add shadow:
-            pos (x, y)
-        add sprite:
             pos (shadow_x, shadow_y)
+        add sprite_moving:
+            pos(x, y)
         add name_title:
             pos(540, 0)
 
@@ -289,7 +335,6 @@ screen character_hover(character):
 screen first_character_select_screen():
     use character_hover(hovered_variable)
     $ quick_menu = False
-
 
     hbox:
         xalign 0.5

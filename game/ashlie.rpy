@@ -8,53 +8,53 @@ define ashlie = Character("Ashlie", color="#E650B4")
 define audio.ashlie_theme = "audio/022520_vtg_anoki.mp3"
 
 image ashlie angry:
-    "sprites/Ashlie/angry.png"
+    "sprites/ashlie/ashlie_std_angry.png"
     yoffset 200
 
 image ashlie annoyed:
-    "sprites/Ashlie/angry.png"
+    "sprites/ashlie/ashlie_std_angry.png"
     yoffset 200
 
 image ashlie amused:
-    "sprites/Ashlie/happy.png"
+    "sprites/ashlie/ashlie_std_happy.png"
     yoffset 200
 
 image ashlie confused:
-    "sprites/Ashlie/confused.png"
+    "sprites/ashlie/ashlie_std_confused.png"
     yoffset 200
 
 image ashlie casual:
-    "sprites/Ashlie/normal.png"
+    "sprites/ashlie/ashlie_std_normal.png"
     yoffset 200
 
 image ashlie excite:
-    "sprites/Ashlie/excite.png"
+    "sprites/ashlie/ashlie_std_excite.png"
     yoffset 200
 
 image ashlie happy:
-    "sprites/Ashlie/happy.png"
+    "sprites/ashlie/ashlie_std_happy.png"
     yoffset 200
 
 image ashlie normal:
-    "sprites/Ashlie/normal.png"
+    "sprites/ashlie/ashlie_std_normal.png"
     yoffset 200
 
 image ashlie sad:
-    "sprites/Ashlie/sad.png"
+    "sprites/ashlie/ashlie_std_sad.png"
     yoffset 200
 
 image ashlie sly:
-    "sprites/Ashlie/sly.png"
+    "sprites/ashlie/ashlie_std_sly.png"
     yoffset 200
 
 image ashlie surprised:
-    "sprites/Ashlie/surprised.png"
+    "sprites/ashlie/ashlie_std_surprised.png"
     yoffset 200
 
 image ashlie tired:
-    "sprites/Ashlie/tired.png"
+    "sprites/ashlie/ashlie_std_tired.png"
     yoffset 200
 
 image ashlie texting:
-    "sprites/Ashlie/excite.png"
+    "sprites/ashlie/ashlie_std_excite.png"
     yoffset 200
