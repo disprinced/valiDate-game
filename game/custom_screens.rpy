@@ -42,7 +42,7 @@ define character_structs = {
         "color": "#002B66",
         "demo_routes": ['Malik'],
         "sprite_pos": (203, 109),
-        "select_sprite": ["arms_neutral", "special"],
+        "select_sprite": ["arms_neutral", "special_test"],
         "intro": "You know he has a habit to try to fix everyone, being a therapist and all. But has he really tried to put that on his partners?"
     },
     "Anoki": {
@@ -129,7 +129,6 @@ default first_character = ""
 default hovered_variable = first_character
 default second_character = ""
 default second_hovered_variable = second_character
-image i_luv_mice = Fixed(Solid("F00", xysize=(150, 50)), Solid("FFF", xysize=(100, 50)), xysize=(150, 50))
 
 init python:
     print ("in init")
@@ -159,50 +158,38 @@ init python:
     char_time = 6.0
     i = 0
     tim = 0.0
-    def char_transition(st, at, char):
-        global i, tim
-        val = character_structs[char]
-        char_lower = char.lower()
-        d = Image("sprites/%s/%s_std_%s.png" %
-            (char_lower, char_lower, val['select_sprite'][i]))
-        tim += 0.1
-        blah = abs(math.sin((tim % char_time) / char_time * 2 * math.pi))
-        if round(blah, 2) == 1.0:
-            tim = char_time / 2
-            i = (i + 1) % 2
-            return d, char_time
-        return Transform(d, alpha=blah), 0.1
 
     def shadow_transition(st, at, char):
         global i, tim
         val = character_structs[char]
         char_lower = char.lower()
-        d = Image("sprites/%s/%s_std_%s.png" %
-            (char_lower, char_lower, val['select_sprite'][i]))
-        d = im.FactorScale(val['sprite'], 1.08, bilinear=True)
-        d = AlphaMask(Solid(val['color']), d)
+        if (char == 'Arihi' and i == 1):
+            d = Image("sprites/%s/%s_std_%s.png" %
+                (char_lower, char_lower, val['select_sprite'][i]),
+                offset=(-200, 100))
+            d1 = im.FactorScale(d, 1.08, bilinear=True)
+            d1 = AlphaMask(Solid(val['color']), d1,
+                offset=(-200, 100))
+        else:
+            d = Image("sprites/%s/%s_std_%s.png" %
+                (char_lower, char_lower, val['select_sprite'][i]))
+            d1 = im.FactorScale(d, 1.08, bilinear=True)
+            d1 = AlphaMask(Solid(val['color']), d1)
+        result = Composite((1920, 1080),
+            (0, 0), d1,
+            (75, 18), d)
         tim += 0.1
         blah = abs(math.sin((tim % char_time) / char_time * 2 * math.pi))
         if round(blah, 2) == 1.0:
             tim = char_time / 2
             i = (i + 1) % 2
-            return d, char_time
-        return Transform(d, alpha=blah), 0.1
-
-    def char_transition2(st, at, char):
-        val = character_structs[char]
-        char_lower = char.lower()
-        i = int(st/ char_time * 2) % len(val['select_sprite'])
-        d = Image("sprites/%s/%s_std_%s.png" %
-            (char_lower, char_lower, val['select_sprite'][i]))
-        blah = abs(math.sin((st % char_time) / char_time * 2 * math.pi))
-        return Transform(d, alpha=blah), 0.1
+            return result, char_time
+        return Transform(result, alpha=blah), 0.1
 
     for char, val in character_structs.iteritems():
         char_lower = char.lower()
         val['bg'] = Image("gui/first_character_select/bg_%s_full.png" % char_lower)
         val['name_title'] = Image("gui/first_character_select/bg_%s_text.png" % char_lower)
-        val['sprite_moving'] = DynamicDisplayable(char_transition, char=char)
         val['sprite'] = Image("sprites/%s/%s_std_%s.png" %
             (char_lower, char_lower, val['select_sprite'][0]))
         val['left_sprite'] = Image("gui/splits/ds_%s_L.png" % (char_lower))
@@ -210,8 +197,7 @@ init python:
 
         if 'flip' in val:
             val['sprite'] = im.Flip(val['sprite'], horizontal=True)
-        val['shadow'] = im.FactorScale(val['sprite'], 1.08, bilinear=True)
-        val['shadow'] = AlphaMask(Solid(val['color']), val['shadow'])
+        val['moving'] = DynamicDisplayable(shadow_transition, char=char)
 
         phone_sprite = "gui/character_select/cs1_%s.png" % (char)
         style.select_icon_button[char].background = \
@@ -219,7 +205,9 @@ init python:
         style.select_icon_button[char].hover_background = \
             Image("gui/character_select/cs1_%s_hover.png" % (char))
         style.select_icon_button[char].selected_idle_background = \
-            im.MatrixColor("gui/character_select/cs1_%s_hover.png" % (char), im.matrix.desaturate())
+            Image("gui/character_select/cs1_%s_active.png" % (char))
+        style.select_icon_button[char].selected_hover_background = \
+            Image("gui/character_select/cs1_%s_active.png" % (char))
         style.select_icon_button[char].insensitive_background = \
              im.MatrixColor(phone_sprite, im.matrix.desaturate())
 
@@ -300,25 +288,24 @@ screen character_hover(character):
             info = character_structs[character]
             bg = info['bg']
             name_title = info['name_title']
-            shadow = info['shadow']
-            sprite_moving = info['sprite_moving']
+            moving = info['moving']
             sprite = info['sprite']
             x, y = info['sprite_pos']
-            shadow_x = x - 50
-            shadow_y = y + 10
+            x = x -75
+            y = y - 18
     add bg
 
     if character != "":
-        add shadow:
-            pos (shadow_x, shadow_y)
-        add sprite_moving:
-            pos(x, y)
+        add moving:
+            pos(x,y)
         add name_title:
             pos(540, 0)
 
     hbox:
         style_prefix "custom"
-        pos (756, 960)
+        spacing 50
+        ypos 950
+        xalign 0.5
 
         if (character == ""):
             textbutton _("CANCEL") action [SetVariable("first_character", ""), MainMenu()] style style.text_button["Malik"]
@@ -326,10 +313,10 @@ screen character_hover(character):
             textbutton _("CANCEL") action [SetVariable("first_character", ""), MainMenu()] style style.text_button[character]
             textbutton _("CONFIRM") action Return(character) style style.text_button[character]
 
-    button action MainMenu() style style.back_button[character]:
-        pos (193, 960)
-        xsize 90
-        ysize 90
+    # button action MainMenu() style style.back_button[character]:
+    #     pos (193, 960)
+    #     xsize 90
+    #     ysize 90
     transclude
 
 screen first_character_select_screen():
@@ -344,10 +331,10 @@ screen first_character_select_screen():
             textbutton _(" "):
                 yoffset -20
                 ysize 180
-                action [ToggleVariable("first_character", true_value=char, false_value=""), SetVariable("hovered_variable", char)]
+                style style.select_icon_button[char]
+                action [ToggleVariable("first_character", true_value=char, false_value="")]
                 hovered SetVariable("hovered_variable", char)
                 unhovered SetVariable("hovered_variable", first_character)
-                style style.select_icon_button[char]
 
 
 screen second_character_hover(character):
