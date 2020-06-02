@@ -457,7 +457,6 @@ screen main_menu():
 
     add "black"
     add "movie_test" at show_hide_dissolve
-    #add "movie_test"
     add "menu_still"
 
     use navigation
