@@ -199,14 +199,13 @@ init python:
         print("scream")
         for c in routes:
             if c != char:
-                character_structs[c]['c2_moving'].set_state("default", transition=dissolve)
-
-    def test(char):
-        print("AAAAAA")
-        print(char)
-        print(second_character)
-        if char != second_character:
-            character_structs[char]['c2_moving'].set_state( "texting", transition=moveinright)
+                character_structs[c]['c2_moving'].set_state("default")
+        if char is None:
+            return
+        if second_character == "":
+            character_structs[char]['c2_moving'].set_state("default", transition=dissolve)
+        elif second_character == char:
+            character_structs[char]['c2_moving'].set_state("calling", transition=dissolve)
 
 
     char_time = 6.0
@@ -326,7 +325,7 @@ init python:
         "default",            # The initial state for this displayable
         # A mapping of "state": displayable
         {
-          "default": None,
+          "default": make_composite(char, "phone_sprite", 0),
           "texting": make_composite(char, "phone_sprite", 0),
           "calling": make_composite(char, "phone_sprite", 1)
         }
@@ -554,6 +553,8 @@ screen second_character_select_screen(first_char):
         textbutton _(" "):
             style style.nah_button[first_char]
             action [SetVariable("first_character", first_char),
+                    Function(turn_off_calling,
+                    char=None, routes=routes),
                     SetVariable("hovered_variable", first_char),
                     SetVariable("second_character", ""),
                     SetVariable("second_hovered_variable", ""),
@@ -581,13 +582,11 @@ screen second_character_select_screen(first_char):
                 action [ToggleVariable("second_character", true_value=char, false_value=""),
                 Function(turn_off_calling,
                 char=char,
-                routes=routes),
-                Function(character_structs[char]['c2_moving'].set_state, new_state="calling", transition=dissolve)
+                routes=routes)
+                #Function(character_structs[char]['c2_moving'].set_state, new_state="calling", transition=dissolve)
                 ]
 
-                hovered [
-                 SetVariable("second_hovered_variable", char),
-                  Function(test, char=char)]
+                hovered SetVariable("second_hovered_variable", char)
                 unhovered SetVariable("second_hovered_variable", second_character)
                 xminimum 300
                 yminimum 75
