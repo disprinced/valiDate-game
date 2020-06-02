@@ -26,3 +26,4 @@ image malik annoyed:
 image malik confused:
     "sprites/malik/malik_std_confused.png"
     yoffset 50
+#TESTING
