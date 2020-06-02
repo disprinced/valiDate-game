@@ -26,22 +26,3 @@ label MalikIsabelle:
     window hide
     pause
     return
-
-label MalikAnoki:
-    scene bg test_background
-    malik "TODO add Malik and Anoki's route here for demo"
-    return
-
-label MalikArihi:
-    scene bg test_background
-    malik "TODO add Malik and Arihi's route here for demo"
-    return
-
-# TODO contemplate moving these into [char]_routes.rpy files when created
-label AnokiMalik:
-    jump MalikAnoki
-    return
-
-label ArihiMalik:
-    jump MalikArihi
-    return
