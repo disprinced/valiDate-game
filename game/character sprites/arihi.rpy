@@ -5,115 +5,106 @@
 ##
 
 define Arihi = Character("Arihi", color="#003B66", what_font="gui/fonts/Dosis-Medium.otf")
-define audio.isabelle_theme = "audio/022520_vtg_anoki.mp3"
+define audio.arihi_theme = "audio/022520_vtg_anoki.mp3"
 
-image isabelle casual:
-    "sprites/isabelle/isabelle_std_amused.png"
+image arihi casual:
+    "sprites/arihi/arihi_std_arms_neutral.png"
     yoffset 200
 
-image isabelle amused:
-    "sprites/isabelle/isabelle_std_angry.png"
+image arihi amused:
+    "sprites/arihi/arihi_std_arms_amused.png"
     yoffset 200
 
-image isabelle angry:
-    "sprites/isabelle/isabelle_std_annoyed.png"
+image arihi angry:
+    "sprites/arihi/arihi_std_hips_upset2.png"
+
+image arihi annoyed:
+    "sprites/arihi/arihi_std_neck_annoyed.png"
     yoffset 200
 
-image isabelle annoyed:
-    "sprites/isabelle/isabelle_std_condescending.png"
+image arihi condescending:
+    "sprites/arihi/arihi_std_confused.png"
+    yoffset 200
+#NEEDS TO BE UPDATED
+
+image arihi confused:
+    "sprites/arihi/arihi_std_disappointed.png"
+    yoffset 200
+#NEEDS TO BE UPDATED
+
+image arihi disappointed:
+    "sprites/arihi/arihi_std_disgust.png"
+    yoffset 200
+#NEEDS TO BE UPDATED
+
+image arihi disgust:
+    "sprites/arihi/arihi_std_flirty.png"
+    yoffset 200
+#NEEDS TO BE UPDATED
+
+image arihi flirting:
+    "sprites/arihi/arihi_std_hips_flirty2.png"
     yoffset 200
 
-image isabelle condescending:
-    "sprites/isabelle/isabelle_std_confused.png"
+image arihi flustered:
+    "sprites/arihi/arihi_std_neck_flushed.png"
     yoffset 200
 
-image isabelle confused:
-    "sprites/isabelle/isabelle_std_disappointed.png"
+image arihi happy:
+    "sprites/arihi/arihi_std_hips_happy.png"
     yoffset 200
 
-image isabelle disappointed:
-    "sprites/isabelle/isabelle_std_disgust.png"
+image arihi happy2:
+    "sprites/arihi/arihi_std_arms_happy2.png"
     yoffset 200
 
-image isabelle disgust:
-    "sprites/isabelle/isabelle_std_flirty.png"
+image arihi nervous:
+#NEEDS TO BE UPDATED
+
+image arihi neutral:
+    "sprites/arihi/arihi_std_arms_neutral2.png"
     yoffset 200
 
-image isabelle flirting:
-    "sprites/isabelle/isabelle_std_flustered.png"
+image arihi neutral2:
+    "sprites/arihi/arihi_std_hips_neutral.png"
     yoffset 200
 
-image isabelle flustered:
-    "sprites/isabelle/isabelle_std_happy.png"
+image arihi neutral3:
+    "sprites/arihi/arihi_std_hips_neutral2.png"
     yoffset 200
 
-image isabelle happy:
-    "sprites/isabelle/isabelle_std_happy2.png"
+image arihi phonecall:
+    "sprites/arihi/arihi_std_phone_calling.png"
     yoffset 200
 
-image isabelle happy2:
-    "sprites/isabelle/isabelle_std_phone_texting.png"
+image arihi phone text:
+    "sprites/arihi/arihi_std_phone_texting.png"
     yoffset 200
 
-image isabelle nervous:
-
-
-image isabelle neutral:
-    "sprites/isabelle/isabelle_std_phone_calling.png"
+image arihi sad:
+    "sprites/arihi/arihi_std_arms_upset.png"
     yoffset 200
 
-image isabelle neutral2:
-    "sprites/isabelle/isabelle_std_neutral.png"
+image arihi smug:
+    "sprites/arihi/arihi_std_arms_smug2.png"
     yoffset 200
 
-image isabelle neutral3:
-    "sprites/isabelle/isabelle_std_neutral2.png"
+image arihi special sprite:
+    "sprites/arihi/arihi_std_special.png"
     yoffset 200
 
-image isabelle phone call:
-    "sprites/isabelle/isabelle_std_neutral3.png"
+image arihi special sprite 2:
+    "sprites/arihi/arihi_std_special2.png"
     yoffset 200
 
-image isabelle phone text:
-    "sprites/isabelle/isabelle_std_nervous.png"
+image arihi surprised:
+    "sprites/arihi/arihi_std_hips_surprised.png"
     yoffset 200
 
-image isabelle sad:
-    "sprites/isabelle/isabelle_std_sad.png"
+image arihi upset 2:
+    "sprites/arihi/arihi_std_hips_upset2.png"
     yoffset 200
 
-image isabelle singing:
-    "sprites/isabelle/isabelle_std_smug.png"
-    yoffset 200
-
-image isabelle singing2:
-    "sprites/isabelle/isabelle_std_smug.png"
-    yoffset 200
-
-image isabelle smoking:
-    "sprites/isabelle/isabelle_std_surprised.png"
-    yoffset 200
-
-image isabelle smug:
-    "sprites/isabelle/isabelle_std_special.png"
-    yoffset 200
-
-image isabelle special sprite:
-    "sprites/isabelle/isabelle_std_special2.png"
-    yoffset 200
-
-image isabelle special sprite 2+:
-    "sprites/isabelle/isabelle_std_xtra_singing.png"
-    yoffset 200
-
-image isabelle surprised:
-    "sprites/isabelle/isabelle_std_upset.png"
-    yoffset 200
-
-image isabelle upset 2:
-    "sprites/isabelle/isabelle_std_upset.png"
-    yoffset 200
-
-image isabelle upset 2:
-    "sprites/isabelle/isabelle_std_upset.png"
+image arihi upset 2:
+    "sprites/arihi/arihi_std_arms_upset2.png"
     yoffset 200

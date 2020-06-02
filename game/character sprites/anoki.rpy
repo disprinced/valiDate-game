@@ -1,110 +1,90 @@
-image isabelle casual:
-    "sprites/isabelle/isabelle_std_amused.png"
+
+define Anoki = Character("Anoki", color="#39E5D7", what_font="gui/fonts/Dosis-Medium.otf")
+define audio.anoki_theme = "audio/022520_vtg_anoki.mp3"
+
+
+
+image anoki casual:
+    "sprites/anoki/anoki_std_casual.png"
     yoffset 200
 
-image isabelle amused:
-    "sprites/isabelle/isabelle_std_angry.png"
+image anoki amused:
+    "sprites/anoki/anoki_std_amused"
     yoffset 200
 
-image isabelle angry:
-    "sprites/isabelle/isabelle_std_annoyed.png"
+image anoki angry:
+    "sprites/anoki/anoki_std_angry.png"
     yoffset 200
 
-image isabelle annoyed:
-    "sprites/isabelle/isabelle_std_condescending.png"
+image anoki annoyed:
+    "sprites/anoki/anoki_std_annoyed.png"
     yoffset 200
 
-image isabelle condescending:
-    "sprites/isabelle/isabelle_std_confused.png"
+image anoki condescending:
+    "sprites/anoki/anoki_std_confused.png"
+    yoffset 200
+#NEED THIS SPRITE UPDATED
+
+image anoki confused:
+    "sprites/anoki/anoki_std_disappointed.png"
+    yoffset 200
+#NEED THIS SPRITE UPDATED
+
+image anoki disappointed:
+    "sprites/anoki/anoki_std_disappointed.png"
     yoffset 200
 
-image isabelle confused:
-    "sprites/isabelle/isabelle_std_disappointed.png"
+image anoki disgust:
+    "sprites/anoki/anoki_std_disgusted.png"
     yoffset 200
 
-image isabelle disappointed:
-    "sprites/isabelle/isabelle_std_disgust.png"
+image anoki flirting:
+    "sprites/anoki/anoki_std_flirty.png"
     yoffset 200
 
-image isabelle disgust:
-    "sprites/isabelle/isabelle_std_flirty.png"
+image anoki flirting2:
+    "sprites/anoki/anoki_std_flirty2.png"
     yoffset 200
 
-image isabelle flirting:
-    "sprites/isabelle/isabelle_std_flustered.png"
+image anoki flustered:
+    "sprites/anoki/anoki_std_flustered.png"
     yoffset 200
 
-image isabelle flustered:
-    "sprites/isabelle/isabelle_std_happy.png"
+image anoki happy:
+    "sprites/anoki/anoki_std_happy.png"
     yoffset 200
 
-image isabelle happy:
-    "sprites/isabelle/isabelle_std_happy2.png"
+image anoki happy2:
+    "sprites/anoki/anoki_std_happy2.png"
     yoffset 200
 
-image isabelle happy2:
-    "sprites/isabelle/isabelle_std_phone_texting.png"
+image anoki nervous:
+#NEED THIS SPRITE UPDATED
+
+image anoki phonecall:
+    "sprites/anoki/anoki_std_phone_talking.png"
     yoffset 200
 
-image isabelle nervous:
-
-
-image isabelle neutral:
-    "sprites/isabelle/isabelle_std_phone_calling.png"
+image anoki phone text:
+    "sprites/anoki/anoki_std_phone_texting.png"
     yoffset 200
 
-image isabelle neutral2:
-    "sprites/isabelle/isabelle_std_neutral.png"
+image anoki sad:
+    "sprites/anoki/anoki_std_sad.png"
     yoffset 200
 
-image isabelle neutral3:
-    "sprites/isabelle/isabelle_std_neutral2.png"
+image anoki smug:
+    "sprites/anoki/anoki_std_smug.png"
     yoffset 200
 
-image isabelle phone call:
-    "sprites/isabelle/isabelle_std_neutral3.png"
+image anoki special sprite:
+    "sprites/anoki/anoki_std_special.png"
     yoffset 200
 
-image isabelle phone text:
-    "sprites/isabelle/isabelle_std_nervous.png"
+image anoki surprised:
+    "sprites/anoki/anoki_std_shocked.png"
     yoffset 200
 
-image isabelle sad:
-    "sprites/isabelle/isabelle_std_sad.png"
-    yoffset 200
-
-image isabelle singing:
-    "sprites/isabelle/isabelle_std_smug.png"
-    yoffset 200
-
-image isabelle singing2:
-    "sprites/isabelle/isabelle_std_smug.png"
-    yoffset 200
-
-image isabelle smoking:
-    "sprites/isabelle/isabelle_std_surprised.png"
-    yoffset 200
-
-image isabelle smug:
-    "sprites/isabelle/isabelle_std_special.png"
-    yoffset 200
-
-image isabelle special sprite:
-    "sprites/isabelle/isabelle_std_special2.png"
-    yoffset 200
-
-image isabelle special sprite 2+:
-    "sprites/isabelle/isabelle_std_xtra_singing.png"
-    yoffset 200
-
-image isabelle surprised:
-    "sprites/isabelle/isabelle_std_upset.png"
-    yoffset 200
-
-image isabelle upset 2:
-    "sprites/isabelle/isabelle_std_upset.png"
-    yoffset 200
-
-image isabelle upset 2:
-    "sprites/isabelle/isabelle_std_upset.png"
+image anoki upset 1:
+    "sprites/anoki/anoki_std_upset.png"
     yoffset 200

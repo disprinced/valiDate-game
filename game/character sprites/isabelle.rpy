@@ -73,7 +73,7 @@ image isabelle neutral3:
     "sprites/isabelle/isabelle_std_neutral3.png"
     yoffset 200
 
-image isabelle phone call:
+image isabelle phonecall:
     "sprites/isabelle/isabelle_std_phone_calling.png"
     yoffset 200
 
@@ -106,7 +106,7 @@ image isabelle special sprite:
     "sprites/isabelle/isabelle_std_special.png"
     yoffset 200
 
-image isabelle special sprite 2+:
+image isabelle special sprite 2:
     "sprites/isabelle/isabelle_std_special2.png"
     yoffset 200
 
