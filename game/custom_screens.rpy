@@ -196,9 +196,19 @@ init python:
             (75, 18), d)
 
     def turn_off_calling(char, routes):
+        print("scream")
         for c in routes:
             if c != char:
-                character_structs[c]['c2_moving'].set_state("default")
+                character_structs[c]['c2_moving'].set_state("default", transition=dissolve)
+
+    def test(char):
+        print("AAAAAA")
+        print(char)
+        print(second_character)
+        if char != second_character:
+            character_structs[char]['c2_moving'].set_state( "texting", transition=moveinright)
+
+
     char_time = 6.0
     i = 0
     tim = 0.0
@@ -316,7 +326,8 @@ init python:
         "default",            # The initial state for this displayable
         # A mapping of "state": displayable
         {
-          "default": make_composite(char, "phone_sprite", 0),
+          "default": None,
+          "texting": make_composite(char, "phone_sprite", 0),
           "calling": make_composite(char, "phone_sprite", 1)
         }
       )
@@ -525,10 +536,6 @@ screen second_character_select_screen(first_char):
         else:
             routes = rainbow_order
         x, y = info['sprite_pos']
-        if second_character != "":
-            right_sprite = character_structs[second_character]['c2_moving']
-        else:
-            right_sprite =  bluh
 
     add left_background
     add left_sprite:
@@ -578,7 +585,9 @@ screen second_character_select_screen(first_char):
                 Function(character_structs[char]['c2_moving'].set_state, new_state="calling", transition=dissolve)
                 ]
 
-                hovered SetVariable("second_hovered_variable", char)
+                hovered [
+                 SetVariable("second_hovered_variable", char),
+                  Function(test, char=char)]
                 unhovered SetVariable("second_hovered_variable", second_character)
                 xminimum 300
                 yminimum 75
