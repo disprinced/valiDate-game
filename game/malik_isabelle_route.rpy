@@ -6,13 +6,18 @@
 
 
 label MalikIsabelle:
-    reader "It’s around 12:30 PM when you come out of your back office to make sure people aren’t fucking around in the front."
-    reader "Business per usual, the bar has its usual day drinkers, while the restaurant is still at top tier. It has a 3 star rating for a reason."
-    reader "A woman around your age walks into the main entrance. A bit unsure of what side she wanted to go to. You catch her eye, and her loud physique fills in the room with the feeling of a high school musical."
-    reader "And that isn’t a good thing."
+    scene bg bobeyes
+    show malik casual 1
+#Malik in the middle
+    reader "There's a lot in this world that you can't do on your own. You find yourself in front of your Bopeyes around 10 a.m. It's dark outside, despite the fact that it's the middle of June. The clouds overshadow your store as you fumble for your keys. "
+    reader "It looks like it might rain, which already puts a damper in your mood. You hate the rain, you always find yourself thinking of your wife -- or, more accurately,  your ex-wife. The wife who made you into the person you are now. "
+    reader "Or, well --  at least according to your latest mixtape."
+    reader "Shit. You forgot to bring your duffle bag full of CDs today. You typically slip them into every order, but you guess you can show off your bars another day."
+    reader "You pull out your phone, notifications dry as always. "
+    reader "Well, not dry. You've got plenty of texts, you just can't be bothered to answer right now. They're mostly from people you'll probably cry about not getting a response from later. "
+    reader "What can you say, it's the Sagittarius in you."
 
-    scene bg test_background
-    show isabelle happy:
+    show isabelle neutral:
         xalign 0.0
         linear 0.5 xalign 0.5
     isabelle "So I’m thinking that I want a drown down some dry biscuits with a shot of tequila?"
