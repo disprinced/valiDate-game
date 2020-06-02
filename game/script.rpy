@@ -47,7 +47,7 @@ label splashscreen:
     #call screen prelude()
     show prelude_test with dissolve
 
-    reader "The sun shines out over a cold Jersey City day. The wind isn’t blowing as hard as it usually does, but you still find yourself hugging your coat a bit closer to your body to shield yourself from the cold."
+    reader "The sun shines out over a cold Jercy City day. The wind isn’t blowing as hard as it usually does, but you still find yourself hugging your coat a bit closer to your body to shield yourself from the cold."
     reader "Hurrying yourself along, you duck into a hair salon your friend pointed you towards, and the warmth of a space heater fills your body the moment you step in."
     reader "The room is dark, all lights pointed towards the area in the far back that sort of looks like a makeshift stage. It’s full of faces you’ve never seen before -- they look so warm, yet so distraught? Did you just walk into a cult?"
     reader "You decide to sit yourself in the corner, pulling out your phone to text one of your friends, hoping one can help you in your time of need."
